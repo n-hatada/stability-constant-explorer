@@ -9,7 +9,7 @@ For Microsoft Windows 7 or later (64 bit), download [StabilityConstantsExplorer_
 ### On Microsoft Windows 7 or later (64 bit)
 Unzip the downloaded compressed file to an appropriate folder. The compressed file contains the executable program (StabilityConstantsExplorer.exe), the SQLite3 database engine (sqlite3.dll), the stability constants adatabase (NIST_SRD_46_ported.db), and documentation (Readme_Win64.txt).
 ### On other operating systems
-Compile the source code using [Lazarus](https://www.lazarus-ide.org/). Obtain and install the appropriate [SQLite3](https://www.sqlite.org/index.html) engine. Place the database file (NIST_SRD_46_ported.db) in the same folder as the compiled program.
+Compile the source code using [Lazarus](https://www.lazarus-ide.org/). Obtain and install an appropriate [SQLite3](https://www.sqlite.org/index.html) engine. Place the database file (NIST_SRD_46_ported.db) in the same folder as the compiled program.
 
 ## Usage
 Execute the program. On the left side of the window, specify the search criteria for stability constants (metal ions and ligands). The search results are displayed on the right side.
