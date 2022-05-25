@@ -33,4 +33,4 @@ The accompanying database file (NIST_SRD_46_ported.db) is based on the following
 The author (Naoyuki Hatada) downloaded the dataset (SRD 46 SQL.zip) from the above website and converted to the SQLite3 format. The dataset may contain errors described in "SRD 46 README.txt" on the website or those caused by the conversion process. 
 
 ## License
-The database file (NIST_SRD_46_ported.db) is a derivative work of the data distributed by NIST. See the [NIST website](https://doi.org/10.18434/M32154) for usage guidelines. The SQLite3 engine (sqlite3.dll) included in the compressed file (StabilityConstantsExplorer_Win64.zip) is in the public domain. The other files (source code and the executable program) are released into the public domain by the author. 
+The database file (NIST_SRD_46_ported.db) is a derivative work of the data distributed by NIST. See the [NIST website](https://doi.org/10.18434/M32154) for usage guidelines. The SQLite3 engine (sqlite3.dll) is in the public domain. The other files (source code and the executable program) are released into the public domain by the author. 
