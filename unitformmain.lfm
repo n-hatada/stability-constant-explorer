@@ -1,0 +1,245 @@
+object FormMain: TFormMain
+  Left = 83
+  Height = 344
+  Top = 108
+  Width = 1241
+  Caption = 'Stability Constants Explorer - a simple search program for NIST SRD 46 database'
+  ClientHeight = 344
+  ClientWidth = 1241
+  OnCreate = FormCreate
+  LCLVersion = '2.2.0.4'
+  object Panel1: TPanel
+    Left = 0
+    Height = 344
+    Top = 0
+    Width = 603
+    Align = alLeft
+    ClientHeight = 344
+    ClientWidth = 603
+    ParentFont = False
+    TabOrder = 0
+    object GroupBoxMetal: TGroupBox
+      Left = 6
+      Height = 312
+      Top = 27
+      Width = 282
+      Anchors = [akTop, akLeft, akBottom]
+      Caption = 'Metal ion'
+      ClientHeight = 292
+      ClientWidth = 278
+      ParentFont = False
+      TabOrder = 0
+      object RadioButtonAllMetals: TRadioButton
+        Left = 6
+        Height = 19
+        Top = 0
+        Width = 34
+        Caption = 'All'
+        Checked = True
+        OnChange = RadioButtonAllMetalsChange
+        ParentFont = False
+        TabOrder = 2
+        TabStop = True
+      end
+      object RadioButtonSelectMetals: TRadioButton
+        Left = 51
+        Height = 19
+        Top = 0
+        Width = 86
+        Caption = 'Select below'
+        OnChange = RadioButtonSelectMetalsChange
+        ParentFont = False
+        TabOrder = 0
+      end
+      object ListBoxMetal: TListBox
+        Left = 6
+        Height = 259
+        Top = 26
+        Width = 269
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        ItemHeight = 0
+        MultiSelect = True
+        OnSelectionChange = ListBoxMetalSelectionChange
+        ParentShowHint = False
+        ParentFont = False
+        TabOrder = 1
+      end
+    end
+    object GroupBoxLigand: TGroupBox
+      Left = 294
+      Height = 312
+      Top = 27
+      Width = 301
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      Caption = 'Ligand'
+      ClientHeight = 292
+      ClientWidth = 297
+      ParentFont = False
+      TabOrder = 1
+      object RadioButtonAllLigands: TRadioButton
+        Left = 6
+        Height = 19
+        Top = 0
+        Width = 34
+        Caption = 'All'
+        Checked = True
+        OnChange = RadioButtonAllLigandsChange
+        ParentFont = False
+        TabOrder = 0
+        TabStop = True
+      end
+      object RadioButtonSelectLigands: TRadioButton
+        Left = 51
+        Height = 19
+        Top = 0
+        Width = 86
+        Caption = 'Select below'
+        OnChange = RadioButtonSelectLigandsChange
+        ParentFont = False
+        TabOrder = 1
+      end
+      object TreeViewLigand: TTreeView
+        Left = 6
+        Height = 259
+        Top = 26
+        Width = 281
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        MultiSelect = True
+        ParentFont = False
+        TabOrder = 2
+        OnSelectionChanged = TreeViewLigandSelectionChanged
+        Options = [tvoAllowMultiselect, tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+      end
+    end
+    object Label1: TLabel
+      Left = 7
+      Height = 15
+      Top = 4
+      Width = 364
+      Caption = 'Search conditions (Either metal ion(s) or ligand(s) must be specified.)'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+  end
+  object Panel2: TPanel
+    Left = 608
+    Height = 344
+    Top = 0
+    Width = 633
+    Align = alClient
+    ClientHeight = 344
+    ClientWidth = 633
+    ParentFont = False
+    TabOrder = 1
+    object StringGridSearchResults: TStringGrid
+      Left = 8
+      Height = 136
+      Top = 40
+      Width = 614
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      ColCount = 0
+      ColumnClickSorts = True
+      DefaultColWidth = 120
+      FixedCols = 0
+      FixedRows = 0
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goColMoving, goEditing, goSmoothScroll]
+      ParentFont = False
+      RowCount = 0
+      TabOrder = 0
+      OnSelection = StringGridSearchResultsSelection
+    end
+    object Label3: TLabel
+      Left = 8
+      Height = 15
+      Top = 8
+      Width = 68
+      Caption = 'Search result'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object ButtonCopyTable: TButton
+      Left = 547
+      Height = 25
+      Top = 8
+      Width = 75
+      Anchors = [akTop, akRight]
+      Caption = 'Copy table'
+      OnClick = ButtonCopyTableClick
+      ParentFont = False
+      TabOrder = 1
+    end
+    object Label4: TLabel
+      Left = 8
+      Height = 15
+      Top = 184
+      Width = 283
+      Anchors = [akLeft, akBottom]
+      Caption = 'Literature for the metal and the ligand selected above.'
+      ParentFont = False
+    end
+    object StringGridLiterature: TStringGrid
+      Left = 8
+      Height = 136
+      Top = 200
+      Width = 614
+      Anchors = [akLeft, akRight, akBottom]
+      ColCount = 2
+      Columns = <      
+        item
+          Title.Caption = 'Code'
+          Width = 50
+        end      
+        item
+          Title.Caption = 'Literature'
+          Width = 500
+        end>
+      DefaultColWidth = 300
+      FixedCols = 0
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goEditing, goDblClickAutoSize, goSmoothScroll]
+      ParentFont = False
+      RowCount = 2
+      TabOrder = 2
+    end
+    object EditSearchResult: TEdit
+      Left = 96
+      Height = 23
+      Top = 8
+      Width = 307
+      Color = clBtnFace
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 3
+    end
+  end
+  object Splitter1: TSplitter
+    Left = 603
+    Height = 344
+    Top = 0
+    Width = 5
+  end
+  object SQLite3Connection1: TSQLite3Connection
+    Connected = False
+    LoginPrompt = False
+    DatabaseName = 'C:\Users\Naoyuki\ownCloud_eeebox\For Rhodes2\StabilityConstants\NIST_SRD_46_ported.db'
+    KeepConnection = False
+    Transaction = SQLTransaction1
+    AlwaysUseBigint = False
+    Left = 570
+    Top = 77
+  end
+  object SQLTransaction1: TSQLTransaction
+    Active = False
+    Database = SQLite3Connection1
+    Left = 653
+    Top = 77
+  end
+  object SQLQuery1: TSQLQuery
+    FieldDefs = <>
+    Database = SQLite3Connection1
+    Transaction = SQLTransaction1
+    Params = <>
+    Macros = <>
+    Left = 755
+    Top = 83
+  end
+end
