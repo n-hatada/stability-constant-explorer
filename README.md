@@ -6,8 +6,14 @@ Stability Constants Explorer is a simple search program for [NIST SRD 46 databas
 For Microsoft Windows 7 or later (64 bit), download [StabilityConstantsExplorer_Win64.zip](https://github.com/n-hatada/stability-constants-explorer/releases/download/v1.0/StabilityConstantsExplorer_Win64.zip).
 
 ## Install
+
 ### On Microsoft Windows 7 or later (64 bit)
-Unzip the downloaded compressed file to an appropriate folder. The compressed file contains the executable program (StabilityConstantsExplorer.exe), the SQLite3 database engine (sqlite3.dll), the stability constants adatabase (NIST_SRD_46_ported.db), and documentation (Readme_Win64.txt).
+Unzip the downloaded compressed file to an appropriate folder. The compressed file contains the following files:
+* Executable program (StabilityConstantsExplorer.exe)
+* SQLite3 database engine (sqlite3.dll)
+* Stability constants adatabase (NIST_SRD_46_ported.db)
+* documentation (Readme_Win64.txt)
+
 ### On other operating systems
 Compile the source code using [Lazarus](https://www.lazarus-ide.org/). Obtain and install an appropriate [SQLite3](https://www.sqlite.org/index.html) engine. Place the database file (NIST_SRD_46_ported.db) in the same folder as the compiled program.
 
