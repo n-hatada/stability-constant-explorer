@@ -37,4 +37,4 @@ The database file (NIST_SRD_46_ported.db) is a derivative work of the data distr
 
 >You may improve, modify, and create derivative works of the data or any portion of the data, and you may copy and distribute such modifications or works. Modified works should carry a notice stating that you changed the data and should note the date and nature of any such change. Please explicitly acknowledge the National Institute of Standards and Technology as the source of the data:  Data citation recommendations are provided at https://www.nist.gov/open/license.
 
-The SQLite3 engine (sqlite3.dll) is in the public domain. The other files (source code and the executable program) are released into the public domain by the author. 
+The SQLite3 engine (sqlite3.dll) is in the public domain. The other files (the source code and the executable program) are released into the public domain by the author. 
