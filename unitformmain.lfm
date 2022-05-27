@@ -3,7 +3,7 @@ object FormMain: TFormMain
   Height = 344
   Top = 108
   Width = 1241
-  Caption = 'Stability Constants Explorer - a simple search program for NIST SRD 46 database'
+  Caption = 'Stability Constant Explorer - a simple search program for NIST SRD 46 database'
   ClientHeight = 344
   ClientWidth = 1241
   OnCreate = FormCreate

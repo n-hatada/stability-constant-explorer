@@ -1,7 +1,7 @@
-{ Search Program for Critically Selected Stability Constants ver.1.0
+{ Stability Constant Explorer ver.1.0
 
  The source code of this program is in the public domain.
- Date: Apr. 22, 2022
+ Date: May. 27, 2022
  Author: Naoyuki Hatada
 
  The accompanying database file (NIST_SRD_46_ported.db) is in the SQLite format
