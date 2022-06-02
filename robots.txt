@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://n-hatada.github.io/stability-constant-explorer/sitemap.xml
