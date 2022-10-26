@@ -3,7 +3,7 @@
     <title>Stability Constant Explorer</title>
     <link href="https://n-hatada.github.io/stability-constant-explorer/feed.xml" rel="self" />
     <link href="https://n-hatada.github.io/stability-constant-explorer" />
-    <updated>2022-06-06T13:01:58+09:00</updated>
+    <updated>2022-10-26T11:47:14+09:00</updated>
     <author>
         <name>Naoyuki Hatada</name>
     </author>
@@ -17,7 +17,7 @@
         <link href="https://n-hatada.github.io/stability-constant-explorer/english.html"/>
         <id>https://n-hatada.github.io/stability-constant-explorer/english.html</id>
 
-        <updated>2022-06-06T12:50:22+09:00</updated>
+        <updated>2022-10-26T11:46:56+09:00</updated>
             <summary>
                 <![CDATA[
                     Overview Stability Constant Explorer is a simple search program for NIST SRD 46 database, “Critically Selected Stability Constants of Metal&hellip;
@@ -29,7 +29,7 @@
 <p>Stability Constant Explorer is a simple search program for <a href="https://data.nist.gov/od/id/mds2-2154">NIST SRD 46 database, “Critically Selected Stability Constants of Metal Complexes”</a>. This database is very useful for chemists, but unfortunately it has been discontinued and the official search program does not work on modern PCs. Therefore, I have created a simple search program based on the data available on the NIST website.</p>
 <h2 id="download">Download</h2>
 <ul>
-<li>For Microsoft Windows 7 or later (64 bit), download <a href="https://github.com/n-hatada/stability-constant-explorer/releases/download/v1.0.1/StabilityConstantExplorer_Win64.zip">StabilityConstantExplorer_Win64.zip</a> (v1.0.1, Released on June 2, 2022.).</li>
+<li>For Microsoft Windows 7 or later (64 bit), download <a href="https://github.com/n-hatada/stability-constant-explorer/releases/download/v1.0.2/StabilityConstantExplorer_Win64.zip">StabilityConstantExplorer_Win64.zip</a> (v1.0.2, Released on Oct. 26, 2022.).</li>
 <li>The Source code is available on <a href="https://github.com/n-hatada/stability-constant-explorer">GitHub</a>.</li>
 </ul>
 <h2 id="install">Install</h2>
@@ -73,7 +73,7 @@ Department of Materials Science and Engineering, Kyoto University</p>
         <link href="https://n-hatada.github.io/stability-constant-explorer/japanese.html"/>
         <id>https://n-hatada.github.io/stability-constant-explorer/japanese.html</id>
 
-        <updated>2022-06-06T13:01:58+09:00</updated>
+        <updated>2022-10-26T11:47:14+09:00</updated>
             <summary>
                 <![CDATA[
                     概要 Stability Constant Explorerは、アメリカ国立標準技術研究所 (NIST) により作成された金属錯体の安定度定数データベース (NIST SRD 46 database, “Critically Selected Stability Constants of Metal Complexes”) を検索・表示するオープンソースのプログラムです。このデータベースは化学者にとって非常に有用ですが、残念ながら開発中止され、公式の検索プログラムは現代のPCでは動作しません。そこで、NISTのホームページで公開されているデータをもとに、簡単な検索プログラムを作成しました。 ダウンロードした圧縮ファイルを適当なフォルダーに解凍してください。圧縮ファイルには、以下のファイルが含まれています。 Lazarusを使って、ソースコードをコンパイルしてください。適切なSQLite3エンジンを入手し、インストールしてください。データベースファイル&hellip;
@@ -85,8 +85,8 @@ Department of Materials Science and Engineering, Kyoto University</p>
 <p>Stability Constant Explorerは、アメリカ国立標準技術研究所 (NIST) により作成された金属錯体の安定度定数データベース (<a href="https://data.nist.gov/od/id/mds2-2154">NIST SRD 46 database, “Critically Selected Stability Constants of Metal Complexes”</a>) を検索・表示するオープンソースのプログラムです。このデータベースは化学者にとって非常に有用ですが、残念ながら開発中止され、公式の検索プログラムは現代のPCでは動作しません。そこで、NISTのホームページで公開されているデータをもとに、簡単な検索プログラムを作成しました。</p>
 <h2 id="ダウンロード">ダウンロード</h2>
 <ul>
-<li>Microsoft Windows 7 以降 (64 bit) 用 (v1.0.1, 2022年6月2日公開) 
-<a href="https://github.com/n-hatada/stability-constant-explorer/releases/download/v1.0.1/StabilityConstantExplorer_Win64.zip">StabilityConstantExplorer_Win64.zip</a>.</li>
+<li>Microsoft Windows 7 以降 (64 bit) 用 (v1.0.2, 2022年10月26日公開) 
+<a href="https://github.com/n-hatada/stability-constant-explorer/releases/download/v1.0.2/StabilityConstantExplorer_Win64.zip">StabilityConstantExplorer_Win64.zip</a>.</li>
 <li>ソースコード等
 <a href="https://github.com/n-hatada/stability-constant-explorer">https://github.com/n-hatada/stability-constant-explorer</a></li>
 </ul>
