@@ -83,7 +83,8 @@ var
   i: integer;
   CurrentLigandClassStr: string;
 begin
-  SQLite3Connection1.DatabaseName:=ExtractFilePath(Application.ExeName)+'NIST_SRD_46_ported.db';
+  SQLite3Connection1.DatabaseName :=
+    ExtractFilePath(Application.ExeName) + 'NIST_SRD_46_ported.db';
   ListBoxMetal.Clear;
   TreeViewLigand.Items.Clear;
   //metals are listed.
@@ -159,30 +160,37 @@ var
   i, j: integer;
 begin
   SQLQuery1.Close;
-  SQLQuery1.SQL.Text :=
-    'SELECT Distinct literature_shortcut as Code, literature_alt as Literature ' +
-    'FROM verkn_ligand_metal vlm ' +
-    'INNER JOIN liganden lig on vlm.ligandenNr=lig.ligandenID ' +
-    'INNER JOIN metal met on vlm.metalNr=met.metalID ' +
-    'INNER JOIN verkn_ligand_metal_literature ' +
-    'on vlm.ligandenNr=verkn_ligand_metal_literature.ligandenNr ' +
-    'AND vlm.metalNr=verkn_ligand_metal_literature.metalNr ' +
-    'INNER JOIN literature_alt on verkn_ligand_metal_literature.literature_altNr=literature_alt.literature_altID '
-    + 'WHERE name_metal="' + StringGridSearchResults.Cells[0, aRow] +
-    '" AND ' + 'name_ligand="' + StringGridSearchResults.Cells[1, aRow] + '";';
-  SQLQuery1.Open;
-  SQLQuery1.Last;
-  StringGridLiterature.RowCount := SQLQuery1.RecordCount + 1;
-  SQLQuery1.First;
-  i := 1;
-  while (not SQLQuery1.EOF) do
-  begin
-    for j := 0 to Pred(SQLQuery1.FieldCount) do
+  try
+
+
+    SQLQuery1.SQL.Text :=
+      'SELECT Distinct literature_shortcut as Code, literature_alt as Literature ' +
+      'FROM verkn_ligand_metal vlm ' +
+      'INNER JOIN liganden lig on vlm.ligandenNr=lig.ligandenID ' +
+      'INNER JOIN metal met on vlm.metalNr=met.metalID ' +
+      'INNER JOIN verkn_ligand_metal_literature ' +
+      'on vlm.ligandenNr=verkn_ligand_metal_literature.ligandenNr ' +
+      'AND vlm.metalNr=verkn_ligand_metal_literature.metalNr ' +
+      'INNER JOIN literature_alt on verkn_ligand_metal_literature.literature_altNr=literature_alt.literature_altID '
+      + 'WHERE name_metal="' + StringGridSearchResults.Cells[0, aRow] +
+      '" AND ' + 'name_ligand="' + StringGridSearchResults.Cells[1, aRow] + '";';
+    SQLQuery1.Open;
+    SQLQuery1.Last;
+    StringGridLiterature.RowCount := SQLQuery1.RecordCount + 1;
+    SQLQuery1.First;
+    i := 1;
+    while (not SQLQuery1.EOF) do
     begin
-      StringGridLiterature.Cells[j, i] := SQLQuery1.Fields.Fields[j].AsString;
+      for j := 0 to Pred(SQLQuery1.FieldCount) do
+      begin
+        StringGridLiterature.Cells[j, i] := SQLQuery1.Fields.Fields[j].AsString;
+      end;
+      Inc(i);
+      SQLQuery1.Next;
     end;
-    Inc(i);
-    SQLQuery1.Next;
+
+  finally
+
   end;
 end;
 
@@ -271,8 +279,8 @@ begin
       begin
         //If a ligand is selected, and the ligand class to which a ligand belongs is not selected,
         //the ligand will be a search target.
-        if TreeViewLigand.Items.Item[i].Selected and
-          not(TreeViewLigand.Items.Item[i].Parent.Selected) then
+        if TreeViewLigand.Items.Item[i].Selected and not
+          (TreeViewLigand.Items.Item[i].Parent.Selected) then
         begin
           if Length(WhereTextLigand) > 0 then
             WhereTextLigand := WhereTextLigand + ' OR ';
@@ -290,7 +298,7 @@ begin
   if Length(WhereText) = 0 then
   begin
     StringGridSearchResults.Clear;
-    EditSearchResult.Text:='Either metal ion(s) or ligand(s) must be specified.';
+    EditSearchResult.Text := 'Either metal ion(s) or ligand(s) must be specified.';
     Exit;
   end;
   //Search result is shown in the string grid.
@@ -321,7 +329,7 @@ begin
   StringGridSearchResults.ColCount := SQLQuery1.FieldCount;
   StringGridSearchResults.RowCount := SQLQuery1.RecordCount + 1;
   //The record count is shown in the editbox.
-  EditSearchResult.Text:=IntToStr(SQLQuery1.RecordCount)+' data found.';
+  EditSearchResult.Text := IntToStr(SQLQuery1.RecordCount) + ' data found.';
   //The header line is prepared.
   for i := 0 to Pred(SQLQuery1.FieldCount) do
   begin
