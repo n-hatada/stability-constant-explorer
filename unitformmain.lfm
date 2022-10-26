@@ -7,7 +7,7 @@ object FormMain: TFormMain
   ClientHeight = 344
   ClientWidth = 1241
   OnCreate = FormCreate
-  LCLVersion = '2.2.0.4'
+  LCLVersion = '2.2.4.0'
   object Panel1: TPanel
     Left = 0
     Height = 344
@@ -118,6 +118,7 @@ object FormMain: TFormMain
       Width = 364
       Caption = 'Search conditions (Either metal ion(s) or ligand(s) must be specified.)'
       Font.Style = [fsBold]
+      ParentColor = False
       ParentFont = False
     end
   end
@@ -155,6 +156,7 @@ object FormMain: TFormMain
       Width = 68
       Caption = 'Search result'
       Font.Style = [fsBold]
+      ParentColor = False
       ParentFont = False
     end
     object ButtonCopyTable: TButton
@@ -175,6 +177,7 @@ object FormMain: TFormMain
       Width = 283
       Anchors = [akLeft, akBottom]
       Caption = 'Literature for the metal and the ligand selected above.'
+      ParentColor = False
       ParentFont = False
     end
     object StringGridLiterature: TStringGrid

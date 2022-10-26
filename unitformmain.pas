@@ -1,7 +1,7 @@
-{ Stability Constant Explorer ver.1.0
+{ Stability Constant Explorer ver.1.0.2
 
  The source code of this program is in the public domain.
- Date: May. 27, 2022
+ Date: Oct. 26, 2022
  Author: Naoyuki Hatada
 
  The accompanying database file (NIST_SRD_46_ported.db) is in the SQLite format
@@ -253,14 +253,26 @@ begin
   end;
   if RadioButtonSelectLigands.Checked then
   begin
+    for i := 0 to Pred(TreeViewLigand.Items.TopLvlCount) do
+    begin
+      if TreeViewLigand.Items.TopLvlItems[i].Selected then
+      begin
+        //If a ligand class is selected,
+        //it will be a search target.
+        if Length(WhereTextLigand) > 0 then
+          WhereTextLigand := WhereTextLigand + ' OR ';
+        WhereTextLigand := WhereTextLigand + 'name_ligandclass="' +
+          TreeViewLigand.Items.TopLvlItems[i].Text + '"';
+      end;
+    end;
     for i := 0 to Pred(TreeViewLigand.Items.Count) do
     begin
       if TreeViewLigand.Items.Item[i].Level = 1 then
       begin
-        //If a ligand is selected, or the ligand class to which a ligand belongs is selected,
+        //If a ligand is selected, and the ligand class to which a ligand belongs is not selected,
         //the ligand will be a search target.
-        if TreeViewLigand.Items.Item[i].Selected or
-          TreeViewLigand.Items.Item[i].Parent.Selected then
+        if TreeViewLigand.Items.Item[i].Selected and
+          not(TreeViewLigand.Items.Item[i].Parent.Selected) then
         begin
           if Length(WhereTextLigand) > 0 then
             WhereTextLigand := WhereTextLigand + ' OR ';
