@@ -1,4 +1,4 @@
-{ Stability Constant Explorer ver.1.0.2
+{ Stability Constant Explorer ver.1.0.3
 
  The source code of this program is in the public domain.
  Date: Oct. 26, 2022
@@ -160,37 +160,30 @@ var
   i, j: integer;
 begin
   SQLQuery1.Close;
-  try
-
-
-    SQLQuery1.SQL.Text :=
-      'SELECT Distinct literature_shortcut as Code, literature_alt as Literature ' +
-      'FROM verkn_ligand_metal vlm ' +
-      'INNER JOIN liganden lig on vlm.ligandenNr=lig.ligandenID ' +
-      'INNER JOIN metal met on vlm.metalNr=met.metalID ' +
-      'INNER JOIN verkn_ligand_metal_literature ' +
-      'on vlm.ligandenNr=verkn_ligand_metal_literature.ligandenNr ' +
-      'AND vlm.metalNr=verkn_ligand_metal_literature.metalNr ' +
-      'INNER JOIN literature_alt on verkn_ligand_metal_literature.literature_altNr=literature_alt.literature_altID '
-      + 'WHERE name_metal="' + StringGridSearchResults.Cells[0, aRow] +
-      '" AND ' + 'name_ligand="' + StringGridSearchResults.Cells[1, aRow] + '";';
-    SQLQuery1.Open;
-    SQLQuery1.Last;
-    StringGridLiterature.RowCount := SQLQuery1.RecordCount + 1;
-    SQLQuery1.First;
-    i := 1;
-    while (not SQLQuery1.EOF) do
+  SQLQuery1.SQL.Text :=
+    'SELECT Distinct literature_shortcut as Code, literature_alt as Literature ' +
+    'FROM verkn_ligand_metal vlm ' +
+    'INNER JOIN liganden lig on vlm.ligandenNr=lig.ligandenID ' +
+    'INNER JOIN metal met on vlm.metalNr=met.metalID ' +
+    'INNER JOIN verkn_ligand_metal_literature ' +
+    'on vlm.ligandenNr=verkn_ligand_metal_literature.ligandenNr ' +
+    'AND vlm.metalNr=verkn_ligand_metal_literature.metalNr ' +
+    'INNER JOIN literature_alt on verkn_ligand_metal_literature.literature_altNr=literature_alt.literature_altID '
+    + 'WHERE name_metal="' + StringGridSearchResults.Cells[0, aRow] +
+    '" AND ' + 'name_ligand="' + StringGridSearchResults.Cells[1, aRow] + '";';
+  SQLQuery1.Open;
+  SQLQuery1.Last;
+  StringGridLiterature.RowCount := SQLQuery1.RecordCount + 1;
+  SQLQuery1.First;
+  i := 1;
+  while (not SQLQuery1.EOF) do
+  begin
+    for j := 0 to Pred(SQLQuery1.FieldCount) do
     begin
-      for j := 0 to Pred(SQLQuery1.FieldCount) do
-      begin
-        StringGridLiterature.Cells[j, i] := SQLQuery1.Fields.Fields[j].AsString;
-      end;
-      Inc(i);
-      SQLQuery1.Next;
+      StringGridLiterature.Cells[j, i] := SQLQuery1.Fields.Fields[j].AsString;
     end;
-
-  finally
-
+    Inc(i);
+    SQLQuery1.Next;
   end;
 end;
 
@@ -339,7 +332,7 @@ begin
   //Data lines are appended.
   SQLQuery1.First;
   i := 1;
-  while (not SQLQuery1.EOF) do
+  while (not SQLQuery1.EOF) and (i < StringGridSearchResults.RowCount) do
   begin
     for j := 0 to Pred(SQLQuery1.FieldCount) do
     begin

@@ -1,6 +1,6 @@
 ========================================================
 Stability Constant Explorer For Windows 64bit
-v1.0.2, released on Oct. 26, 2022
+v1.0.3, released on Oct. 26, 2022
 https://github.com/n-hatada/stability-constant-explorer
 ========================================================
 ## Overview
