@@ -68,12 +68,106 @@ type
 
   end;
 
+
+  { TMetal }
+
+  TMetal = class(TObject)
+  private
+    FMetalName: string;
+    FFormattedMetalName: string;
+    procedure FormatMetalName;
+    procedure SetMetalName(AValue: string);
+  public
+    property MetalName: string read FMetalName write SetMetalName;
+    property FormattedMetalName: string read FFormattedMetalName;
+    constructor Create(AMetalName: string);
+    destructor Destroy; override;
+  end;
+
 var
   FormMain: TFormMain;
 
 implementation
 
 {$R *.lfm}
+
+{ TMetal }
+
+procedure TMetal.FormatMetalName;
+var
+  i, j, StartSubPos,EndSubPos: integer;
+begin
+  FFormattedMetalName := FMetalName;
+  i := 1;
+  //subscript
+  StartSubPos:=Pos('<sub>', FFormattedMetalName, i);
+  if StartSubPos > 0 then
+  begin
+    i:=StartSubPos;
+    Delete(FFormattedMetalName,StartSubPos,5);
+    EndSubPos:=Pos('</sub>', FFormattedMetalName, i);
+    if EndSubPos>;
+
+
+  end;
+
+  while Pos('<sub>', FMetalName, i) > 0 do
+  begin
+
+  end;
+
+
+  FFormattedMetalName := FMetalName;
+  i := Pos('<sub>', FFormattedMetalName);
+  while i > 0 do
+  begin
+    j := Pos('</sub>', FFormattedMetalName);
+    if j > i then
+    begin
+      Inc(i, 5);
+      while (i <= j) and (FFormattedMetalName[i] in ['0'..'9', '+', '-']) do
+      begin
+        case FFormattedMetalName[i] of
+          '0': FFormattedMetalName[i] := #$2080;
+          '1': FFormattedMetalName[i] := #$2081;
+          '2': FFormattedMetalName[i] := #$2082;
+          '3': FFormattedMetalName[i] := #$2083;
+          '4': FFormattedMetalName[i] := #$2084;
+          '5': FFormattedMetalName[i] := #$2085;
+          '6': FFormattedMetalName[i] := #$2086;
+          '7': FFormattedMetalName[i] := #$2087;
+          '8': FFormattedMetalName[i] := #$2088;
+          '9': FFormattedMetalName[i] := #$2089;
+          '+': FFormattedMetalName[i] := #$208A;
+          '-': FFormattedMetalName[i] := #$208B;
+        end;
+        Inc(i);
+      end;
+      Inc(j, 6);
+    end
+    else
+      Break;
+    i := Pos('<sub>', FFormattedMetalName);
+  end;
+end;
+
+
+procedure TMetal.SetMetalName(AValue: string);
+begin
+  if FMetalName = AValue then Exit;
+  FMetalName := AValue;
+  FormatMetalName;
+end;
+
+constructor TMetal.Create(AMetalName: string);
+begin
+  MetalName := AMetalName;
+end;
+
+destructor TMetal.Destroy;
+begin
+  inherited Destroy;
+end;
 
 { TFormMain }
 
