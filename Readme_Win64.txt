@@ -43,4 +43,4 @@ The SQLite3 engine (sqlite3.dll) is in the public domain. The other files (the s
 ### v1.1.0, released on Mar. 24, 2023
 * Metal ions and ligands can be filtered by text.
 * Value types can be specified in the search criteria.
-* Minor improvements. (e.g., superscript and subscript characters are shown in the metal ion list.)
+* Minor improvements. (e.g., superscript and subscript characters are shown in the metal ion list, and the lists are made read-only.)
