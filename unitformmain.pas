@@ -355,7 +355,7 @@ end;
 
 procedure TFormMain.RadioGroupValueTypeSelectionChanged(Sender: TObject);
 begin
-DoSearchAndShowResults();
+  DoSearchAndShowResults();
 end;
 
 
@@ -445,6 +445,8 @@ var
   WhereText, WhereTextMetal, WhereTextLigand: string;
   i, j: integer;
 begin
+  //Clear literature table
+  StringGridLiterature.RowCount:=1;
   WhereText := '';
   WhereTextMetal := '';
   WhereTextLigand := '';
@@ -509,9 +511,9 @@ begin
   end;
   //value type
   case RadioGroupValueType.ItemIndex of
-    1: WhereText:=WhereText+' AND name_constanttyp=''K''';
-    2: WhereText:=WhereText+' AND name_constanttyp=''H''';
-    3: WhereText:=WhereText+' AND name_constanttyp=''S''';
+    1: WhereText := WhereText + ' AND name_constanttyp=''K''';
+    2: WhereText := WhereText + ' AND name_constanttyp=''H''';
+    3: WhereText := WhereText + ' AND name_constanttyp=''S''';
   end;
   //Search result is shown in the string grid.
   SQLQuery1.Close;
@@ -541,7 +543,8 @@ begin
   StringGridSearchResults.ColCount := SQLQuery1.FieldCount;
   StringGridSearchResults.RowCount := SQLQuery1.RecordCount + 1;
   //The record count is shown in the editbox.
-  EditSearchResult.Text := IntToStr(SQLQuery1.RecordCount) + ' data found. They are shown in the table below.';
+  EditSearchResult.Text := IntToStr(SQLQuery1.RecordCount) +
+    ' data found. They are shown in the table below.';
   //The header line is prepared.
   for i := 0 to Pred(SQLQuery1.FieldCount) do
   begin
