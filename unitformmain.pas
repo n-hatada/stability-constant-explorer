@@ -95,60 +95,94 @@ implementation
 
 procedure TMetal.FormatMetalName;
 var
-  i, j, StartSubPos,EndSubPos: integer;
+  i, StartPos, EndPos: integer;
+  OriginalStr, FormattedStr: string;
 begin
-  FFormattedMetalName := FMetalName;
+  //Apply subscript
+  OriginalStr := FMetalName;
+  FormattedStr := '';
   i := 1;
-  //subscript
-  StartSubPos:=Pos('<sub>', FFormattedMetalName, i);
-  if StartSubPos > 0 then
-  begin
-    i:=StartSubPos;
-    Delete(FFormattedMetalName,StartSubPos,5);
-    EndSubPos:=Pos('</sub>', FFormattedMetalName, i);
-    if EndSubPos>;
-
-
-  end;
-
-  while Pos('<sub>', FMetalName, i) > 0 do
-  begin
-
-  end;
-
-
-  FFormattedMetalName := FMetalName;
-  i := Pos('<sub>', FFormattedMetalName);
-  while i > 0 do
-  begin
-    j := Pos('</sub>', FFormattedMetalName);
-    if j > i then
+  repeat
+    StartPos := Pos('<sub>', OriginalStr, i);
+    if StartPos > 0 then
     begin
-      Inc(i, 5);
-      while (i <= j) and (FFormattedMetalName[i] in ['0'..'9', '+', '-']) do
+      //when '<sub>' is found
+      FormattedStr := FormattedStr + Copy(OriginalStr, i, StartPos - i);
+      i := StartPos;
+      Delete(OriginalStr, StartPos, 5);
+      EndPos := Pos('</sub>', OriginalStr, i);
+      if EndPos > 0 then Delete(OriginalStr, EndPos, 6);
+      while (i <= Length(OriginalStr)) and (i <> EndPos) do
       begin
-        case FFormattedMetalName[i] of
-          '0': FFormattedMetalName[i] := #$2080;
-          '1': FFormattedMetalName[i] := #$2081;
-          '2': FFormattedMetalName[i] := #$2082;
-          '3': FFormattedMetalName[i] := #$2083;
-          '4': FFormattedMetalName[i] := #$2084;
-          '5': FFormattedMetalName[i] := #$2085;
-          '6': FFormattedMetalName[i] := #$2086;
-          '7': FFormattedMetalName[i] := #$2087;
-          '8': FFormattedMetalName[i] := #$2088;
-          '9': FFormattedMetalName[i] := #$2089;
-          '+': FFormattedMetalName[i] := #$208A;
-          '-': FFormattedMetalName[i] := #$208B;
+        case OriginalStr[i] of
+          '0': FormattedStr := FormattedStr + #$E2#$82#$80;
+          '1': FormattedStr := FormattedStr + #$E2#$82#$81;
+          '2': FormattedStr := FormattedStr + #$E2#$82#$82;
+          '3': FormattedStr := FormattedStr + #$E2#$82#$83;
+          '4': FormattedStr := FormattedStr + #$E2#$82#$84;
+          '5': FormattedStr := FormattedStr + #$E2#$82#$85;
+          '6': FormattedStr := FormattedStr + #$E2#$82#$86;
+          '7': FormattedStr := FormattedStr + #$E2#$82#$87;
+          '8': FormattedStr := FormattedStr + #$E2#$82#$88;
+          '9': FormattedStr := FormattedStr + #$E2#$82#$89;
+          '+': FormattedStr := FormattedStr + #$E2#$82#$8A;
+          '-': FormattedStr := FormattedStr + #$E2#$82#$8B;
+          else
+            FormattedStr := FormattedStr + OriginalStr[i]
         end;
         Inc(i);
       end;
-      Inc(j, 6);
     end
     else
+    begin
+      //when '<sub>' is not found
+      FormattedStr := FormattedStr + Copy(OriginalStr, i, Length(OriginalStr) - i + 1);
       Break;
-    i := Pos('<sub>', FFormattedMetalName);
-  end;
+    end;
+  until False;
+  //Apply superscript
+  OriginalStr := FormattedStr;
+  FormattedStr := '';
+  i := 1;
+  repeat
+    StartPos := Pos('<sup>', OriginalStr, i);
+    if StartPos > 0 then
+    begin
+      //when '<sup>' is found
+      FormattedStr := FormattedStr + Copy(OriginalStr, i, StartPos - i);
+      i := StartPos;
+      Delete(OriginalStr, StartPos, 5);
+      EndPos := Pos('</sup>', OriginalStr, i);
+      if EndPos > 0 then Delete(OriginalStr, EndPos, 6);
+      while (i <= Length(OriginalStr)) and (i <> EndPos) do
+      begin
+        case OriginalStr[i] of
+          '0': FormattedStr := FormattedStr + #$E2#$81#$B0;
+          '1': FormattedStr := FormattedStr + #$C2#$B9;
+          '2': FormattedStr := FormattedStr + #$C2#$B2;
+          '3': FormattedStr := FormattedStr + #$C2#$B3;
+          '4': FormattedStr := FormattedStr + #$E2#$81#$B4;
+          '5': FormattedStr := FormattedStr + #$E2#$81#$B5;
+          '6': FormattedStr := FormattedStr + #$E2#$81#$B6;
+          '7': FormattedStr := FormattedStr + #$E2#$81#$B7;
+          '8': FormattedStr := FormattedStr + #$E2#$81#$B8;
+          '9': FormattedStr := FormattedStr + #$E2#$81#$B9;
+          '+': FormattedStr := FormattedStr + #$E2#$81#$BA;
+          '-': FormattedStr := FormattedStr + #$E2#$81#$BB;
+          else
+            FormattedStr := FormattedStr + OriginalStr[i]
+        end;
+        Inc(i);
+      end;
+    end
+    else
+    begin
+      //when '<sup>' is not found
+      FormattedStr := FormattedStr + Copy(OriginalStr, i, Length(OriginalStr) - i + 1);
+      Break;
+    end;
+  until False;
+  FFormattedMetalName:=FormattedStr;
 end;
 
 
@@ -176,6 +210,7 @@ procedure TFormMain.FormCreate(Sender: TObject);
 var
   i: integer;
   CurrentLigandClassStr: string;
+  CurrentMetal: TMetal;
 begin
   SQLite3Connection1.DatabaseName :=
     ExtractFilePath(Application.ExeName) + 'NIST_SRD_46_ported.db';
@@ -186,7 +221,8 @@ begin
   SQLQuery1.Open;
   while (not SQLQuery1.EOF) do
   begin
-    ListBoxMetal.Items.Add(SQLQuery1.FieldByName('name_metal').AsString);
+    CurrentMetal := TMetal.Create(SQLQuery1.FieldByName('name_metal').AsString);
+    ListBoxMetal.AddItem(CurrentMetal.FormattedMetalName, CurrentMetal);
     SQLQuery1.Next;
   end;
   //ligand classes are listed.
@@ -342,7 +378,7 @@ begin
         if Length(WhereTextMetal) > 0 then
           WhereTextMetal := WhereTextMetal + ' OR ';
         WhereTextMetal := WhereTextMetal + 'name_metal="' +
-          ListBoxMetal.Items.Strings[i] + '"';
+          TMetal(ListBoxMetal.Items.Objects[i]).MetalName + '"';
       end;
     end;
   end;
