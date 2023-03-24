@@ -3,7 +3,7 @@
     <title>Stability Constant Explorer</title>
     <link href="https://n-hatada.github.io/stability-constant-explorer/feed.xml" rel="self" />
     <link href="https://n-hatada.github.io/stability-constant-explorer" />
-    <updated>2023-03-24T20:48:53+09:00</updated>
+    <updated>2023-03-24T21:08:04+09:00</updated>
     <author>
         <name>Naoyuki Hatada</name>
     </author>
@@ -17,7 +17,7 @@
         <link href="https://n-hatada.github.io/stability-constant-explorer/english.html"/>
         <id>https://n-hatada.github.io/stability-constant-explorer/english.html</id>
 
-        <updated>2023-03-24T20:48:13+09:00</updated>
+        <updated>2023-03-24T21:08:04+09:00</updated>
             <summary>
                 <![CDATA[
                     Overview Stability Constant Explorer is a simple search program for NIST SRD 46 database, “Critically Selected Stability Constants of Metal&hellip;
@@ -45,7 +45,7 @@
 <p>Compile the source code using <a href="https://www.lazarus-ide.org/">Lazarus</a>. Obtain and install an appropriate <a href="https://www.sqlite.org/index.html">SQLite3</a> engine. Place the database file (NIST_SRD_46_ported.db) in the same folder as the compiled program.</p>
 <h2 id="usage">Usage</h2>
 <p>Execute the program. On the left side of the window, specify the search criteria for stability constants (metal ions and ligands). The search results are displayed on the right side.
-<figure class="post__image"><img loading="lazy" src="https://n-hatada.github.io/stability-constant-explorer/media/posts/5/screenshot-2.png" alt="Screenshot" width="1963" height="685"  sizes="(max-width: 48em) 100vw, 768px" srcset="https://n-hatada.github.io/stability-constant-explorer/media/posts/5/responsive/screenshot-2-xs.png 300w ,https://n-hatada.github.io/stability-constant-explorer/media/posts/5/responsive/screenshot-2-sm.png 480w ,https://n-hatada.github.io/stability-constant-explorer/media/posts/5/responsive/screenshot-2-md.png 768w"></figure></p>
+<figure class="post__image"><img loading="lazy" src="https://n-hatada.github.io/stability-constant-explorer/media/posts/5/screenshot.png" alt="Screenshot" width="1963" height="685"  sizes="(max-width: 48em) 100vw, 768px" srcset="https://n-hatada.github.io/stability-constant-explorer/media/posts/5/responsive/screenshot-xs.png 300w ,https://n-hatada.github.io/stability-constant-explorer/media/posts/5/responsive/screenshot-sm.png 480w ,https://n-hatada.github.io/stability-constant-explorer/media/posts/5/responsive/screenshot-md.png 768w"></figure></p>
 <h2 id="author">Author</h2>
 <p>Naoyuki Hatada, Ph.D.
 Department of Materials Science and Engineering, Kyoto University</p>
@@ -88,7 +88,7 @@ Department of Materials Science and Engineering, Kyoto University</p>
         <link href="https://n-hatada.github.io/stability-constant-explorer/japanese.html"/>
         <id>https://n-hatada.github.io/stability-constant-explorer/japanese.html</id>
 
-        <updated>2023-03-24T20:48:53+09:00</updated>
+        <updated>2023-03-24T21:07:47+09:00</updated>
             <summary>
                 <![CDATA[
                     概要 Stability Constant Explorerは、アメリカ国立標準技術研究所 (NIST) により作成された金属錯体の安定度定数データベース (NIST SRD 46 database, “Critically Selected Stability Constants of Metal Complexes”) を検索・表示するオープンソースのプログラムです。このデータベースは化学者にとって非常に有用ですが、残念ながら開発中止され、公式の検索プログラムは現代のPCでは動作しません。そこで、NISTのホームページで公開されているデータをもとに、簡単な検索プログラムを作成しました。 ダウンロードした圧縮ファイルを適当なフォルダーに解凍してください。圧縮ファイルには、以下のファイルが含まれています。 Lazarusを使って、ソースコードをコンパイルしてください。適切なSQLite3エンジンを入手し、インストールしてください。データベースファイル&hellip;
@@ -118,7 +118,7 @@ Department of Materials Science and Engineering, Kyoto University</p>
 <p><a href="https://www.lazarus-ide.org/">Lazarus</a>を使って、ソースコードをコンパイルしてください。適切な<a href="https://www.sqlite.org/index.html">SQLite3</a>エンジンを入手し、インストールしてください。データベースファイル (NIST_SRD_46_ported.db) をコンパイルしたプログラムと同じフォルダーに置いてください。</p>
 <h2 id="使い方">使い方</h2>
 <p>プログラムを実行します。ウィンドウの左側で、安定度定数の検索条件 （金属イオンと配位子） を指定します。右側に検索結果が表示されます。
-<figure class="post__image"><img loading="lazy" src="https://n-hatada.github.io/stability-constant-explorer/media/posts/6/screenshot-2.png" alt="Screenshot" width="1963" height="685"  sizes="(max-width: 48em) 100vw, 768px" srcset="https://n-hatada.github.io/stability-constant-explorer/media/posts/6/responsive/screenshot-2-xs.png 300w ,https://n-hatada.github.io/stability-constant-explorer/media/posts/6/responsive/screenshot-2-sm.png 480w ,https://n-hatada.github.io/stability-constant-explorer/media/posts/6/responsive/screenshot-2-md.png 768w"></figure></p>
+<figure class="post__image"><img loading="lazy" src="https://n-hatada.github.io/stability-constant-explorer/media/posts/6/screenshot.png" alt="Screenshot" width="1963" height="685"  sizes="(max-width: 48em) 100vw, 768px" srcset="https://n-hatada.github.io/stability-constant-explorer/media/posts/6/responsive/screenshot-xs.png 300w ,https://n-hatada.github.io/stability-constant-explorer/media/posts/6/responsive/screenshot-sm.png 480w ,https://n-hatada.github.io/stability-constant-explorer/media/posts/6/responsive/screenshot-md.png 768w"></figure></p>
 <h2 id="プログラムの作者">プログラムの作者</h2>
 <p>畑田　直行　（京都大学大学院工学研究科材料工学専攻）</p>
 <h2 id="データの出典">データの出典</h2>
