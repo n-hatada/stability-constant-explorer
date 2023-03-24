@@ -106,9 +106,10 @@ object FormMain: TFormMain
         Anchors = [akTop, akLeft, akRight, akBottom]
         MultiSelect = True
         ParentFont = False
+        ReadOnly = True
         TabOrder = 2
         OnSelectionChanged = TreeViewLigandSelectionChanged
-        Options = [tvoAllowMultiselect, tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+        Options = [tvoAllowMultiselect, tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
       end
     end
     object Label1: TLabel
