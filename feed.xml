@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
     <title>Stability Constant Explorer</title>
     <link href="https://n-hatada.github.io/stability-constant-explorer/feed.xml" rel="self" />
     <link href="https://n-hatada.github.io/stability-constant-explorer" />
-    <updated>2022-10-31T16:42:44+09:00</updated>
+    <updated>2023-03-24T20:48:53+09:00</updated>
     <author>
         <name>Naoyuki Hatada</name>
     </author>
@@ -17,7 +17,7 @@
         <link href="https://n-hatada.github.io/stability-constant-explorer/english.html"/>
         <id>https://n-hatada.github.io/stability-constant-explorer/english.html</id>
 
-        <updated>2022-10-31T16:42:44+09:00</updated>
+        <updated>2023-03-24T20:48:13+09:00</updated>
             <summary>
                 <![CDATA[
                     Overview Stability Constant Explorer is a simple search program for NIST SRD 46 database, “Critically Selected Stability Constants of Metal&hellip;
@@ -29,7 +29,7 @@
 <p>Stability Constant Explorer is a simple search program for <a href="https://data.nist.gov/od/id/mds2-2154">NIST SRD 46 database, “Critically Selected Stability Constants of Metal Complexes”</a>. This database is very useful for chemists, but unfortunately it has been discontinued and the official search program does not work on modern PCs. Therefore, I have created a simple search program based on the data available on the NIST website.</p>
 <h2 id="download">Download</h2>
 <ul>
-<li>For Microsoft Windows 7 or later (64 bit), download <a href="https://github.com/n-hatada/stability-constant-explorer/releases/download/v1.0.3/StabilityConstantExplorer_Win64.zip">StabilityConstantExplorer_Win64.zip</a> (v1.0.3, Released on Oct. 26, 2022.).</li>
+<li>For Microsoft Windows 7 or later (64 bit), download <a href="https://github.com/n-hatada/stability-constant-explorer/releases/download/v1.1.0/StabilityConstantExplorer_Win64.zip">StabilityConstantExplorer_Win64.zip</a> (v1.1.0, Released on Mar. 24, 2023.).</li>
 <li>The Source code is available on <a href="https://github.com/n-hatada/stability-constant-explorer">GitHub</a>.</li>
 </ul>
 <h2 id="install">Install</h2>
@@ -45,7 +45,7 @@
 <p>Compile the source code using <a href="https://www.lazarus-ide.org/">Lazarus</a>. Obtain and install an appropriate <a href="https://www.sqlite.org/index.html">SQLite3</a> engine. Place the database file (NIST_SRD_46_ported.db) in the same folder as the compiled program.</p>
 <h2 id="usage">Usage</h2>
 <p>Execute the program. On the left side of the window, specify the search criteria for stability constants (metal ions and ligands). The search results are displayed on the right side.
-<figure class="post__image"><img loading="lazy" src="https://n-hatada.github.io/stability-constant-explorer/media/posts/5/screenshot.png" sizes="(max-width: 48em) 100vw, 768px" srcset="https://n-hatada.github.io/stability-constant-explorer/media/posts/5/responsive/screenshot-xs.png 300w ,https://n-hatada.github.io/stability-constant-explorer/media/posts/5/responsive/screenshot-sm.png 480w ,https://n-hatada.github.io/stability-constant-explorer/media/posts/5/responsive/screenshot-md.png 768w"  alt="Screenshot" width="1963" height="685" /></figure></p>
+<figure class="post__image"><img loading="lazy" src="https://n-hatada.github.io/stability-constant-explorer/media/posts/5/screenshot-2.png" alt="Screenshot" width="1963" height="685"  sizes="(max-width: 48em) 100vw, 768px" srcset="https://n-hatada.github.io/stability-constant-explorer/media/posts/5/responsive/screenshot-2-xs.png 300w ,https://n-hatada.github.io/stability-constant-explorer/media/posts/5/responsive/screenshot-2-sm.png 480w ,https://n-hatada.github.io/stability-constant-explorer/media/posts/5/responsive/screenshot-2-md.png 768w"></figure></p>
 <h2 id="author">Author</h2>
 <p>Naoyuki Hatada, Ph.D.
 Department of Materials Science and Engineering, Kyoto University</p>
@@ -61,6 +61,21 @@ Department of Materials Science and Engineering, Kyoto University</p>
 <p>You may improve, modify, and create derivative works of the data or any portion of the data, and you may copy and distribute such modifications or works. Modified works should carry a notice stating that you changed the data and should note the date and nature of any such change. Please explicitly acknowledge the National Institute of Standards and Technology as the source of the data:  Data citation recommendations are provided at <a href="https://www.nist.gov/open/license">https://www.nist.gov/open/license</a>.</p>
 </blockquote>
 <p>The SQLite3 engine (sqlite3.dll) is in the public domain. The other files (the source code and the executable program) are released into the public domain by the author. </p>
+<h2 id="version-history">Version history</h2>
+<h3 id="v10-released-on-may-27-2022">v1.0, released on May 27, 2022</h3>
+<ul>
+<li>Initial release.</li>
+</ul>
+<h3 id="v103-released-on-oct-26-2022">v1.0.3, released on Oct. 26, 2022</h3>
+<ul>
+<li>Bug fix.</li>
+</ul>
+<h3 id="v110-released-on-mar-24-2023">v1.1.0, released on Mar. 24, 2023</h3>
+<ul>
+<li>Metal ions and ligands can be filtered by text.</li>
+<li>Value types can be specified in the search criteria.</li>
+<li>Minor improvements. (e.g., superscript and subscript characters are shown in the metal ion list, and the lists are made read-only.)</li>
+</ul>
 
             ]]>
         </content>
@@ -73,7 +88,7 @@ Department of Materials Science and Engineering, Kyoto University</p>
         <link href="https://n-hatada.github.io/stability-constant-explorer/japanese.html"/>
         <id>https://n-hatada.github.io/stability-constant-explorer/japanese.html</id>
 
-        <updated>2022-10-31T16:41:09+09:00</updated>
+        <updated>2023-03-24T20:48:53+09:00</updated>
             <summary>
                 <![CDATA[
                     概要 Stability Constant Explorerは、アメリカ国立標準技術研究所 (NIST) により作成された金属錯体の安定度定数データベース (NIST SRD 46 database, “Critically Selected Stability Constants of Metal Complexes”) を検索・表示するオープンソースのプログラムです。このデータベースは化学者にとって非常に有用ですが、残念ながら開発中止され、公式の検索プログラムは現代のPCでは動作しません。そこで、NISTのホームページで公開されているデータをもとに、簡単な検索プログラムを作成しました。 ダウンロードした圧縮ファイルを適当なフォルダーに解凍してください。圧縮ファイルには、以下のファイルが含まれています。 Lazarusを使って、ソースコードをコンパイルしてください。適切なSQLite3エンジンを入手し、インストールしてください。データベースファイル&hellip;
@@ -85,8 +100,8 @@ Department of Materials Science and Engineering, Kyoto University</p>
 <p>Stability Constant Explorerは、アメリカ国立標準技術研究所 (NIST) により作成された金属錯体の安定度定数データベース (<a href="https://data.nist.gov/od/id/mds2-2154">NIST SRD 46 database, “Critically Selected Stability Constants of Metal Complexes”</a>) を検索・表示するオープンソースのプログラムです。このデータベースは化学者にとって非常に有用ですが、残念ながら開発中止され、公式の検索プログラムは現代のPCでは動作しません。そこで、NISTのホームページで公開されているデータをもとに、簡単な検索プログラムを作成しました。</p>
 <h2 id="ダウンロード">ダウンロード</h2>
 <ul>
-<li>Microsoft Windows 7 以降 (64 bit) 用 (v1.0.3, 2022年10月26日公開) 
-<a href="https://github.com/n-hatada/stability-constant-explorer/releases/download/v1.0.3/StabilityConstantExplorer_Win64.zip">StabilityConstantExplorer_Win64.zip</a>.</li>
+<li>Microsoft Windows 7 以降 (64 bit) 用 (v1.1.0, 2023年3月24日公開) 
+<a href="https://github.com/n-hatada/stability-constant-explorer/releases/download/v1.1.0/StabilityConstantExplorer_Win64.zip">StabilityConstantExplorer_Win64.zip</a>.</li>
 <li>ソースコード等
 <a href="https://github.com/n-hatada/stability-constant-explorer">https://github.com/n-hatada/stability-constant-explorer</a></li>
 </ul>
@@ -103,7 +118,7 @@ Department of Materials Science and Engineering, Kyoto University</p>
 <p><a href="https://www.lazarus-ide.org/">Lazarus</a>を使って、ソースコードをコンパイルしてください。適切な<a href="https://www.sqlite.org/index.html">SQLite3</a>エンジンを入手し、インストールしてください。データベースファイル (NIST_SRD_46_ported.db) をコンパイルしたプログラムと同じフォルダーに置いてください。</p>
 <h2 id="使い方">使い方</h2>
 <p>プログラムを実行します。ウィンドウの左側で、安定度定数の検索条件 （金属イオンと配位子） を指定します。右側に検索結果が表示されます。
-<figure class="post__image"><img loading="lazy" src="https://n-hatada.github.io/stability-constant-explorer/media/posts/6/screenshot.png" sizes="(max-width: 48em) 100vw, 768px" srcset="https://n-hatada.github.io/stability-constant-explorer/media/posts/6/responsive/screenshot-xs.png 300w ,https://n-hatada.github.io/stability-constant-explorer/media/posts/6/responsive/screenshot-sm.png 480w ,https://n-hatada.github.io/stability-constant-explorer/media/posts/6/responsive/screenshot-md.png 768w"  alt="Screenshot" width="1963" height="685" /></figure></p>
+<figure class="post__image"><img loading="lazy" src="https://n-hatada.github.io/stability-constant-explorer/media/posts/6/screenshot-2.png" alt="Screenshot" width="1963" height="685"  sizes="(max-width: 48em) 100vw, 768px" srcset="https://n-hatada.github.io/stability-constant-explorer/media/posts/6/responsive/screenshot-2-xs.png 300w ,https://n-hatada.github.io/stability-constant-explorer/media/posts/6/responsive/screenshot-2-sm.png 480w ,https://n-hatada.github.io/stability-constant-explorer/media/posts/6/responsive/screenshot-2-md.png 768w"></figure></p>
 <h2 id="プログラムの作者">プログラムの作者</h2>
 <p>畑田　直行　（京都大学大学院工学研究科材料工学専攻）</p>
 <h2 id="データの出典">データの出典</h2>
@@ -118,6 +133,21 @@ Department of Materials Science and Engineering, Kyoto University</p>
 <p>You may improve, modify, and create derivative works of the data or any portion of the data, and you may copy and distribute such modifications or works. Modified works should carry a notice stating that you changed the data and should note the date and nature of any such change. Please explicitly acknowledge the National Institute of Standards and Technology as the source of the data:  Data citation recommendations are provided at <a href="https://www.nist.gov/open/license">https://www.nist.gov/open/license</a>.</p>
 </blockquote>
 <p>SQLite3エンジン(sqlite3.dll)はパブリックドメインです。その他のファイル(ソースコードと実行プログラム)はパブリックドメインとして公開します。</p>
+<h2 id="バージョン履歴">バージョン履歴</h2>
+<h3 id="v10-2022年5月27日公開">v1.0, 2022年5月27日公開</h3>
+<ul>
+<li>初期リリース</li>
+</ul>
+<h3 id="v103-2022年10月26日公開">v1.0.3, 2022年10月26日公開</h3>
+<ul>
+<li>バグ修正</li>
+</ul>
+<h3 id="v110-2023年3月24日公開">v1.1.0, 2023年3月24日公開</h3>
+<ul>
+<li>金属イオンや配位子をテキストで絞り込めるようになりました。</li>
+<li>検索条件として値の種類を指定できるようになりました。</li>
+<li>その他軽微な改良を行いました。(例：金属イオンリストで上付き文字と下付き文字が表示されるようになりました。また、リストが読み取り専用になりました。)</li>
+</ul>
 
             ]]>
         </content>
