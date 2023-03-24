@@ -1,7 +1,7 @@
-{ Stability Constant Explorer ver.1.0.3
+{ Stability Constant Explorer ver.1.1.0
 
  The source code of this program is in the public domain.
- Date: Oct. 26, 2022
+ Date: Mar. 24, 2023
  Author: Naoyuki Hatada
 
  The accompanying database file (NIST_SRD_46_ported.db) is in the SQLite format
@@ -36,32 +36,30 @@ type
     Label1: TLabel;
     Label3: TLabel;
     Label4: TLabel;
-    ListBoxMetal: TListBox;
+    LabeledEditMetalFilter: TLabeledEdit;
+    LabeledEditLigandFilter: TLabeledEdit;
     Panel1: TPanel;
     Panel2: TPanel;
-    RadioButtonAllMetals: TRadioButton;
-    RadioButtonAllLigands: TRadioButton;
-    RadioButtonSelectMetals: TRadioButton;
-    RadioButtonSelectLigands: TRadioButton;
+    RadioGroupValueType: TRadioGroup;
     Splitter1: TSplitter;
     SQLite3Connection1: TSQLite3Connection;
     SQLQuery1: TSQLQuery;
     SQLTransaction1: TSQLTransaction;
     StringGridLiterature: TStringGrid;
     StringGridSearchResults: TStringGrid;
+    TreeViewMetal: TTreeView;
     TreeViewLigand: TTreeView;
     procedure ButtonCopyTableClick(Sender: TObject);
     procedure CheckListBoxLigandItemClick(Sender: TObject; Index: integer);
     procedure CheckListBoxMetalItemClick(Sender: TObject; Index: integer);
     procedure FormCreate(Sender: TObject);
-    procedure ListBoxMetalSelectionChange(Sender: TObject; User: boolean);
-    procedure RadioButtonAllLigandsChange(Sender: TObject);
-    procedure RadioButtonAllMetalsChange(Sender: TObject);
-    procedure RadioButtonSelectLigandsChange(Sender: TObject);
-    procedure RadioButtonSelectMetalsChange(Sender: TObject);
+    procedure LabeledEditLigandFilterChange(Sender: TObject);
+    procedure LabeledEditMetalFilterChange(Sender: TObject);
+    procedure RadioGroupValueTypeSelectionChanged(Sender: TObject);
     procedure StringGridSearchResultsSelection(Sender: TObject;
       aCol, aRow: integer);
     procedure TreeViewLigandSelectionChanged(Sender: TObject);
+    procedure TreeViewMetalSelectionChanged(Sender: TObject);
   private
     procedure DoSearchAndShowResults();
   public
@@ -74,12 +72,15 @@ type
   TMetal = class(TObject)
   private
     FMetalName: string;
-    FFormattedMetalName: string;
-    procedure FormatMetalName;
+    FMetalNameFormatted: string;
+    FMetalNamePlainText: string;
+    procedure GenerateMetalNameFormatted;
+    procedure GenerateMetalNamePlainText;
     procedure SetMetalName(AValue: string);
   public
     property MetalName: string read FMetalName write SetMetalName;
-    property FormattedMetalName: string read FFormattedMetalName;
+    property MetalNameFormatted: string read FMetalNameFormatted;
+    property MetalNamePlainText: string read FMetalNamePlainText;
     constructor Create(AMetalName: string);
     destructor Destroy; override;
   end;
@@ -93,7 +94,7 @@ implementation
 
 { TMetal }
 
-procedure TMetal.FormatMetalName;
+procedure TMetal.GenerateMetalNameFormatted;
 var
   i, StartPos, EndPos: integer;
   OriginalStr, FormattedStr: string;
@@ -182,7 +183,21 @@ begin
       Break;
     end;
   until False;
-  FFormattedMetalName:=FormattedStr;
+  FMetalNameFormatted := FormattedStr;
+end;
+
+//Omit tags
+procedure TMetal.GenerateMetalNamePlainText;
+begin
+  FMetalNamePlainText := FMetalName;
+  FMetalNamePlainText := StringReplace(FMetalNamePlainText, '<sub>',
+    '', [rfReplaceAll, rfIgnoreCase]);
+  FMetalNamePlainText := StringReplace(FMetalNamePlainText, '</sub>',
+    '', [rfReplaceAll, rfIgnoreCase]);
+  FMetalNamePlainText := StringReplace(FMetalNamePlainText, '<sup>',
+    '', [rfReplaceAll, rfIgnoreCase]);
+  FMetalNamePlainText := StringReplace(FMetalNamePlainText, '</sup>',
+    '', [rfReplaceAll, rfIgnoreCase]);
 end;
 
 
@@ -190,7 +205,8 @@ procedure TMetal.SetMetalName(AValue: string);
 begin
   if FMetalName = AValue then Exit;
   FMetalName := AValue;
-  FormatMetalName;
+  GenerateMetalNameFormatted;
+  GenerateMetalNamePlainText;
 end;
 
 constructor TMetal.Create(AMetalName: string);
@@ -211,76 +227,137 @@ var
   i: integer;
   CurrentLigandClassStr: string;
   CurrentMetal: TMetal;
+  CurrentLigandClass: TTreeNode;
 begin
   SQLite3Connection1.DatabaseName :=
     ExtractFilePath(Application.ExeName) + 'NIST_SRD_46_ported.db';
-  ListBoxMetal.Clear;
+  TreeViewMetal.Items.Clear;
   TreeViewLigand.Items.Clear;
   //metals are listed.
+  TreeViewMetal.Items.Add(nil, 'All metals');
   SQLQuery1.SQL.Text := 'SELECT name_metal FROM metal;';
   SQLQuery1.Open;
   while (not SQLQuery1.EOF) do
   begin
     CurrentMetal := TMetal.Create(SQLQuery1.FieldByName('name_metal').AsString);
-    ListBoxMetal.AddItem(CurrentMetal.FormattedMetalName, CurrentMetal);
+    TreeViewMetal.Items.AddChildobject(TreeViewMetal.Items.TopLvlItems[0],
+      CurrentMetal.MetalNameFormatted, CurrentMetal);
     SQLQuery1.Next;
   end;
+  TreeViewMetal.Items.Item[0].Expand(False);
   //ligand classes are listed.
+  TreeViewLigand.Items.Add(nil, 'All ligands');
   SQLQuery1.Close;
   SQLQuery1.SQL.Text := 'SELECT name_ligandclass FROM ligand_class;';
   SQLQuery1.Open;
   while (not SQLQuery1.EOF) do
   begin
-    TreeViewLigand.Items.Add(nil, SQLQuery1.FieldByName('name_ligandclass').AsString);
+    TreeViewLigand.Items.AddChild(TreeViewLigand.Items.TopLvlItems[0],
+      SQLQuery1.FieldByName('name_ligandclass').AsString);
     SQLQuery1.Next;
   end;
   //ligands are appended to each ligand class.
-  for i := 0 to Pred(TreeViewLigand.Items.TopLvlCount) do
+  i := 0;
+  while i < TreeViewLigand.Items.Count do
   begin
-    CurrentLigandClassStr := TreeViewLigand.Items.TopLvlItems[i].Text;
-    SQLQuery1.Close;
-    SQLQuery1.SQL.Text := 'SELECT name_ligand FROM liganden ' +
-      'INNER JOIN ligand_class on liganden.ligand_classNr=ligand_class.ligand_classID '
-      +
-      'WHERE ligand_class.name_ligandclass="' + CurrentLigandClassStr + '";';
-    SQLQuery1.Open;
-    while (not SQLQuery1.EOF) do
+    if TreeViewLigand.Items.Item[i].Level = 1 then
     begin
-      TreeViewLigand.Items.AddChild(TreeViewLigand.Items.TopLvlItems[i],
-        SQLQuery1.FieldByName('name_ligand').AsString);
-      SQLQuery1.Next;
+      CurrentLigandClass := TreeViewLigand.Items.Item[i];
+      CurrentLigandClassStr := TreeViewLigand.Items.Item[i].Text;
+      SQLQuery1.Close;
+      SQLQuery1.SQL.Text :=
+        'SELECT name_ligand FROM liganden ' +
+        'INNER JOIN ligand_class on liganden.ligand_classNr=ligand_class.ligand_classID '
+        +
+        'WHERE ligand_class.name_ligandclass="' + CurrentLigandClassStr + '";';
+      SQLQuery1.Open;
+      while (not SQLQuery1.EOF) do
+      begin
+        TreeViewLigand.Items.AddChild(CurrentLigandClass,
+          SQLQuery1.FieldByName('name_ligand').AsString);
+        SQLQuery1.Next;
+      end;
+    end;
+    Inc(i);
+  end;
+  TreeViewLigand.Items.Item[0].Expand(False);
+end;
+
+procedure TFormMain.LabeledEditLigandFilterChange(Sender: TObject);
+var
+  FilterLowerCase: string;
+  i: integer;
+begin
+  FilterLowerCase := LowerCase(LabeledEditLigandFilter.Text);
+  //filter ligand classes.
+  for i := 0 to Pred(TreeViewLigand.Items.Count) do
+  begin
+    if TreeViewLigand.Items.Item[i].Level = 1 then
+    begin
+      if Length(FilterLowerCase) = 0 then
+      begin
+        TreeViewLigand.Items.Item[i].Visible := True;
+      end
+      else if Pos(FilterLowerCase,
+        LowerCase(TreeViewLigand.Items.Item[i].Text)) > 0 then
+      begin
+        TreeViewLigand.Items.Item[i].Visible := True;
+      end
+      else
+        TreeViewLigand.Items.Item[i].Visible := False;
+    end;
+  end;
+  //filter ligands.
+  for i := 0 to Pred(TreeViewLigand.Items.Count) do
+  begin
+    if TreeViewLigand.Items.Item[i].Level = 2 then
+    begin
+      if Length(FilterLowerCase) = 0 then
+      begin
+        TreeViewLigand.Items.Item[i].Visible := True;
+      end
+      else if Pos(FilterLowerCase,
+        LowerCase(TreeViewLigand.Items.Item[i].Text)) > 0 then
+      begin
+        TreeViewLigand.Items.Item[i].Visible := True;
+        TreeViewLigand.Items.Item[i].Parent.Visible := True;
+      end
+      else
+        TreeViewLigand.Items.Item[i].Visible := False;
     end;
   end;
 end;
 
-//When a metal(s) is selected on the listbox, the right radio button is checked and search is performed.
-procedure TFormMain.ListBoxMetalSelectionChange(Sender: TObject; User: boolean);
+procedure TFormMain.LabeledEditMetalFilterChange(Sender: TObject);
+var
+  FilterLowerCase: string;
+  i: integer;
 begin
-  if RadioButtonSelectMetals.Checked = False then
-    RadioButtonSelectMetals.Checked := True
-  else
-    DoSearchAndShowResults();
+  FilterLowerCase := LowerCase(LabeledEditMetalFilter.Text);
+  for i := 0 to Pred(TreeViewMetal.Items.Count) do
+  begin
+    if TreeViewMetal.Items.Item[i].Level = 1 then
+    begin
+      if Length(FilterLowerCase) = 0 then
+      begin
+        TreeViewMetal.Items.Item[i].Visible := True;
+      end
+      else if Pos(FilterLowerCase,
+        LowerCase(TMetal(TreeViewMetal.Items.Item[i].Data).MetalNamePlainText)) > 0 then
+      begin
+        TreeViewMetal.Items.Item[i].Visible := True;
+      end
+      else
+        TreeViewMetal.Items.Item[i].Visible := False;
+    end;
+  end;
 end;
 
-procedure TFormMain.RadioButtonAllLigandsChange(Sender: TObject);
+procedure TFormMain.RadioGroupValueTypeSelectionChanged(Sender: TObject);
 begin
-  DoSearchAndShowResults();
+DoSearchAndShowResults();
 end;
 
-procedure TFormMain.RadioButtonAllMetalsChange(Sender: TObject);
-begin
-  DoSearchAndShowResults();
-end;
-
-procedure TFormMain.RadioButtonSelectLigandsChange(Sender: TObject);
-begin
-  DoSearchAndShowResults();
-end;
-
-procedure TFormMain.RadioButtonSelectMetalsChange(Sender: TObject);
-begin
-  DoSearchAndShowResults();
-end;
 
 
 //When a cell in the search result stringgrid is selected. -> References for the line is shown.
@@ -320,10 +397,12 @@ end;
 //When a ligand(s) is selected on the treeview, the right radio button is checked and search is performed.
 procedure TFormMain.TreeViewLigandSelectionChanged(Sender: TObject);
 begin
-  if RadioButtonSelectLigands.Checked = False then
-    RadioButtonSelectLigands.Checked := True
-  else
-    DoSearchAndShowResults();
+  DoSearchAndShowResults();
+end;
+//When a metal(s) is selected on the listbox, the right radio button is checked and search is performed.
+procedure TFormMain.TreeViewMetalSelectionChanged(Sender: TObject);
+begin
+  DoSearchAndShowResults();
 end;
 
 procedure TFormMain.CheckListBoxLigandItemClick(Sender: TObject; Index: integer);
@@ -369,36 +448,40 @@ begin
   WhereText := '';
   WhereTextMetal := '';
   WhereTextLigand := '';
-  if RadioButtonSelectMetals.Checked then
+  if not TreeViewMetal.Items.Item[0].Selected then
   begin
-    for i := 0 to Pred(ListBoxMetal.Count) do
+    //When 'All metals' is not selected.
+    for i := 0 to Pred(TreeViewMetal.Items.Count) do
     begin
-      if ListBoxMetal.Selected[i] then
+      if (TreeViewMetal.Items.Item[i].Level = 1) and
+        TreeViewMetal.Items.Item[i].Selected then
       begin
         if Length(WhereTextMetal) > 0 then
           WhereTextMetal := WhereTextMetal + ' OR ';
         WhereTextMetal := WhereTextMetal + 'name_metal="' +
-          TMetal(ListBoxMetal.Items.Objects[i]).MetalName + '"';
+          TMetal(TreeViewMetal.Items.Item[i].Data).MetalName + '"';
       end;
     end;
   end;
-  if RadioButtonSelectLigands.Checked then
+  if not TreeViewLigand.Items.Item[0].Selected then
   begin
-    for i := 0 to Pred(TreeViewLigand.Items.TopLvlCount) do
+    //When 'All ligands' is not selected.
+    for i := 0 to Pred(TreeViewLigand.Items.Count) do
     begin
-      if TreeViewLigand.Items.TopLvlItems[i].Selected then
+      if (TreeViewLigand.Items.Item[i].Level = 1) and
+        TreeViewLigand.Items.Item[i].Selected then
       begin
         //If a ligand class is selected,
         //it will be a search target.
         if Length(WhereTextLigand) > 0 then
           WhereTextLigand := WhereTextLigand + ' OR ';
         WhereTextLigand := WhereTextLigand + 'name_ligandclass="' +
-          TreeViewLigand.Items.TopLvlItems[i].Text + '"';
+          TreeViewLigand.Items.Item[i].Text + '"';
       end;
     end;
     for i := 0 to Pred(TreeViewLigand.Items.Count) do
     begin
-      if TreeViewLigand.Items.Item[i].Level = 1 then
+      if TreeViewLigand.Items.Item[i].Level = 2 then
       begin
         //If a ligand is selected, and the ligand class to which a ligand belongs is not selected,
         //the ligand will be a search target.
@@ -423,6 +506,12 @@ begin
     StringGridSearchResults.Clear;
     EditSearchResult.Text := 'Either metal ion(s) or ligand(s) must be specified.';
     Exit;
+  end;
+  //value type
+  case RadioGroupValueType.ItemIndex of
+    1: WhereText:=WhereText+' AND name_constanttyp=''K''';
+    2: WhereText:=WhereText+' AND name_constanttyp=''H''';
+    3: WhereText:=WhereText+' AND name_constanttyp=''S''';
   end;
   //Search result is shown in the string grid.
   SQLQuery1.Close;
@@ -452,7 +541,7 @@ begin
   StringGridSearchResults.ColCount := SQLQuery1.FieldCount;
   StringGridSearchResults.RowCount := SQLQuery1.RecordCount + 1;
   //The record count is shown in the editbox.
-  EditSearchResult.Text := IntToStr(SQLQuery1.RecordCount) + ' data found.';
+  EditSearchResult.Text := IntToStr(SQLQuery1.RecordCount) + ' data found. They are shown in the table below.';
   //The header line is prepared.
   for i := 0 to Pred(SQLQuery1.FieldCount) do
   begin

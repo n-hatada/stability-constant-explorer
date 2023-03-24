@@ -20,107 +20,119 @@ object FormMain: TFormMain
     TabOrder = 0
     object GroupBoxMetal: TGroupBox
       Left = 6
-      Height = 312
+      Height = 253
       Top = 27
-      Width = 282
+      Width = 210
       Anchors = [akTop, akLeft, akBottom]
-      Caption = 'Metal ion'
-      ClientHeight = 292
-      ClientWidth = 278
+      Caption = 'Specify metal ion(s) from list'
+      ClientHeight = 233
+      ClientWidth = 206
       ParentFont = False
       TabOrder = 0
-      object RadioButtonAllMetals: TRadioButton
-        Left = 6
-        Height = 19
-        Top = 0
-        Width = 34
-        Caption = 'All'
-        Checked = True
-        OnChange = RadioButtonAllMetalsChange
-        ParentFont = False
-        TabOrder = 2
-        TabStop = True
-      end
-      object RadioButtonSelectMetals: TRadioButton
-        Left = 51
-        Height = 19
-        Top = 0
-        Width = 86
-        Caption = 'Select below'
-        OnChange = RadioButtonSelectMetalsChange
-        ParentFont = False
+      object LabeledEditMetalFilter: TLabeledEdit
+        Left = 8
+        Height = 23
+        Top = 20
+        Width = 192
+        Anchors = [akTop, akLeft, akRight]
+        EditLabel.Height = 15
+        EditLabel.Width = 192
+        EditLabel.Caption = 'Filter list by text:'
+        EditLabel.ParentColor = False
         TabOrder = 0
+        OnChange = LabeledEditMetalFilterChange
       end
-      object ListBoxMetal: TListBox
-        Left = 6
-        Height = 259
-        Top = 26
-        Width = 269
+      object TreeViewMetal: TTreeView
+        Left = 8
+        Height = 179
+        Top = 48
+        Width = 193
         Anchors = [akTop, akLeft, akRight, akBottom]
-        ItemHeight = 0
-        MultiSelect = True
-        OnSelectionChange = ListBoxMetalSelectionChange
-        ParentShowHint = False
-        ParentFont = False
-        TabOrder = 1
-      end
-    end
-    object GroupBoxLigand: TGroupBox
-      Left = 294
-      Height = 312
-      Top = 27
-      Width = 301
-      Anchors = [akTop, akLeft, akRight, akBottom]
-      Caption = 'Ligand'
-      ClientHeight = 292
-      ClientWidth = 297
-      ParentFont = False
-      TabOrder = 1
-      object RadioButtonAllLigands: TRadioButton
-        Left = 6
-        Height = 19
-        Top = 0
-        Width = 34
-        Caption = 'All'
-        Checked = True
-        OnChange = RadioButtonAllLigandsChange
-        ParentFont = False
-        TabOrder = 0
-        TabStop = True
-      end
-      object RadioButtonSelectLigands: TRadioButton
-        Left = 51
-        Height = 19
-        Top = 0
-        Width = 86
-        Caption = 'Select below'
-        OnChange = RadioButtonSelectLigandsChange
-        ParentFont = False
-        TabOrder = 1
-      end
-      object TreeViewLigand: TTreeView
-        Left = 6
-        Height = 259
-        Top = 26
-        Width = 281
-        Anchors = [akTop, akLeft, akRight, akBottom]
+        Font.Height = -16
         MultiSelect = True
         ParentFont = False
         ReadOnly = True
-        TabOrder = 2
+        TabOrder = 1
+        OnSelectionChanged = TreeViewMetalSelectionChanged
+        Options = [tvoAllowMultiselect, tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+      end
+    end
+    object GroupBoxLigand: TGroupBox
+      Left = 224
+      Height = 253
+      Top = 27
+      Width = 371
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      Caption = 'Specify ligand(s) from list'
+      ClientHeight = 233
+      ClientWidth = 367
+      ParentFont = False
+      TabOrder = 1
+      object TreeViewLigand: TTreeView
+        Left = 6
+        Height = 178
+        Top = 48
+        Width = 351
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        Font.Height = -16
+        MultiSelect = True
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 0
         OnSelectionChanged = TreeViewLigandSelectionChanged
         Options = [tvoAllowMultiselect, tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+      end
+      object LabeledEditLigandFilter: TLabeledEdit
+        Left = 8
+        Height = 23
+        Top = 20
+        Width = 349
+        Anchors = [akTop, akLeft, akRight]
+        EditLabel.Height = 15
+        EditLabel.Width = 349
+        EditLabel.Caption = 'Filter list by text:'
+        EditLabel.ParentColor = False
+        TabOrder = 1
+        OnChange = LabeledEditLigandFilterChange
       end
     end
     object Label1: TLabel
       Left = 7
       Height = 15
       Top = 4
-      Width = 364
-      Caption = 'Search conditions (Either metal ion(s) or ligand(s) must be specified.)'
+      Width = 344
+      Caption = 'Search criteria (Either metal ion(s) or ligand(s) must be specified.)'
       Font.Style = [fsBold]
       ParentColor = False
       ParentFont = False
+    end
+    object RadioGroupValueType: TRadioGroup
+      Left = 8
+      Height = 48
+      Top = 288
+      Width = 235
+      Anchors = [akLeft, akBottom]
+      AutoFill = True
+      Caption = 'Value type'
+      ChildSizing.LeftRightSpacing = 6
+      ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+      ChildSizing.EnlargeVertical = crsHomogenousChildResize
+      ChildSizing.ShrinkHorizontal = crsScaleChilds
+      ChildSizing.ShrinkVertical = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 4
+      ClientHeight = 28
+      ClientWidth = 231
+      Columns = 4
+      ItemIndex = 0
+      Items.Strings = (
+        'All'
+        'Log K'
+        'DH'
+        'DS'
+      )
+      OnSelectionChanged = RadioGroupValueTypeSelectionChanged
+      TabOrder = 2
     end
   end
   object Panel2: TPanel
@@ -175,9 +187,9 @@ object FormMain: TFormMain
       Left = 8
       Height = 15
       Top = 184
-      Width = 283
+      Width = 277
       Anchors = [akLeft, akBottom]
-      Caption = 'Literature for the metal and the ligand selected above.'
+      Caption = 'Literature for the metal and the ligand clicked above.'
       ParentColor = False
       ParentFont = False
     end

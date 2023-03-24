@@ -3,7 +3,7 @@
 Stability Constant Explorer is a simple search program for [NIST SRD 46 database, "Critically Selected Stability Constants of Metal Complexes"](https://data.nist.gov/od/id/mds2-2154). This database is very useful for chemists, but unfortunately it has been discontinued and the official search program does not work on modern PCs. Therefore, I have created a simple search program based on the data available on the NIST website.
 
 ## Download
-* For Microsoft Windows 7 or later (64 bit), download [StabilityConstantExplorer_Win64.zip](https://github.com/n-hatada/stability-constant-explorer/releases/download/v1.0.3/StabilityConstantExplorer_Win64.zip) (v1.0.3, Released on Oct. 26, 2022.).
+* For Microsoft Windows 7 or later (64 bit), download [StabilityConstantExplorer_Win64.zip](https://github.com/n-hatada/stability-constant-explorer/releases/download/v1.1.0/StabilityConstantExplorer_Win64.zip) (v1.1.0, Released on Mar. 24, 2023.).
 * The Source code is available on [GitHub](https://github.com/n-hatada/stability-constant-explorer).
 
 ## Install
@@ -39,3 +39,13 @@ The database file (NIST_SRD_46_ported.db) is a derivative work of the data distr
 >You may improve, modify, and create derivative works of the data or any portion of the data, and you may copy and distribute such modifications or works. Modified works should carry a notice stating that you changed the data and should note the date and nature of any such change. Please explicitly acknowledge the National Institute of Standards and Technology as the source of the data:  Data citation recommendations are provided at https://www.nist.gov/open/license.
 
 The SQLite3 engine (sqlite3.dll) is in the public domain. The other files (the source code and the executable program) are released into the public domain by the author. 
+
+## Version history
+### v1.0, released on May 27, 2022
+* Initial release.
+### v1.0.3, released on Oct. 26, 2022
+* Bug fix.
+### v1.1.0, released on Mar. 24, 2023
+* Metal ions and ligands can be filtered by text.
+* Value types can be specified in the search criteria.
+* Minor improvements. (e.g., superscript and subscript characters are shown in the metal ion list.)

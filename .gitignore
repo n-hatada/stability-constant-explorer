@@ -13,3 +13,4 @@ StabilityConstants.res
 StabilityConstants.lps
 StabilityConstantExplorer_Win64.zip
 StabilityConstantExplorer.exe
+*.exe
