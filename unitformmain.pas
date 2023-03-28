@@ -22,7 +22,7 @@ interface
 
 uses
   Classes, SysUtils, SQLDB, SQLite3Conn, Forms, Controls, Graphics, Dialogs,
-  StdCtrls, Grids, Clipbrd, ExtCtrls, ComCtrls;
+  StdCtrls, Grids, Clipbrd, ExtCtrls, ComCtrls, Types;
 
 type
 
@@ -357,8 +357,6 @@ procedure TFormMain.RadioGroupValueTypeSelectionChanged(Sender: TObject);
 begin
   DoSearchAndShowResults();
 end;
-
-
 
 //When a cell in the search result stringgrid is selected. -> References for the line is shown.
 procedure TFormMain.StringGridSearchResultsSelection(Sender: TObject;

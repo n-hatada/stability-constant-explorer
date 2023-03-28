@@ -156,7 +156,7 @@ object FormMain: TFormMain
       DefaultColWidth = 120
       FixedCols = 0
       FixedRows = 0
-      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goColMoving, goEditing, goSmoothScroll]
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goColMoving, goEditing, goSmoothScroll, goRowHighlight]
       ParentFont = False
       RowCount = 0
       TabOrder = 0
