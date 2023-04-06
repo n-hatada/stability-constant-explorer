@@ -1,6 +1,6 @@
 ========================================================
 Stability Constant Explorer For Windows 64bit
-v1.1.0, released on Mar. 24, 2023
+v1.1.1, released on Apr. 6, 2023
 https://github.com/n-hatada/stability-constant-explorer
 ========================================================
 ## Overview
@@ -44,3 +44,6 @@ The SQLite3 engine (sqlite3.dll) is in the public domain. The other files (the s
 * Metal ions and ligands can be filtered by text.
 * Value types can be specified in the search criteria.
 * Minor improvements. (e.g., superscript and subscript characters are shown in the metal ion list, and the lists are made read-only.)
+### v1.1.1, released on Apr. 6, 2023
+* Minor fixes and improvements.
+* Update SQLite3 engine.

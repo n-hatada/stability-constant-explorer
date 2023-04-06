@@ -3,7 +3,7 @@
 Stability Constant Explorer is a simple search program for [NIST SRD 46 database, "Critically Selected Stability Constants of Metal Complexes"](https://data.nist.gov/od/id/mds2-2154). This database is very useful for chemists, but unfortunately it has been discontinued and the official search program does not work on modern PCs. Therefore, I have created a simple search program based on the data available on the NIST website.
 
 ## Download
-* For Microsoft Windows 7 or later (64 bit), download [StabilityConstantExplorer_Win64.zip](https://github.com/n-hatada/stability-constant-explorer/releases/download/v1.1.0/StabilityConstantExplorer_Win64.zip) (v1.1.0, Released on Mar. 24, 2023.).
+* For Microsoft Windows 7 or later (64 bit), download [StabilityConstantExplorer_Win64.zip](https://github.com/n-hatada/stability-constant-explorer/releases/download/v1.1.1/StabilityConstantExplorer_Win64.zip) (v1.1.1, Released on Apr. 6, 2023.).
 * The Source code is available on [GitHub](https://github.com/n-hatada/stability-constant-explorer).
 
 ## Install
@@ -49,3 +49,6 @@ The SQLite3 engine (sqlite3.dll) is in the public domain. The other files (the s
 * Metal ions and ligands can be filtered by text.
 * Value types can be specified in the search criteria.
 * Minor improvements. (e.g., superscript and subscript characters are shown in the metal ion list, and the lists are made read-only.)
+### v1.1.1, released on Apr. 6, 2023
+* Minor fixes and improvements.
+* Update SQLite3 engine.

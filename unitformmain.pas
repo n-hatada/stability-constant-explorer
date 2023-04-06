@@ -1,7 +1,7 @@
-{ Stability Constant Explorer ver.1.1.0
+{ Stability Constant Explorer ver.1.1.1
 
  The source code of this program is in the public domain.
- Date: Mar. 24, 2023
+ Date: Apr. 6, 2023
  Author: Naoyuki Hatada
 
  The accompanying database file (NIST_SRD_46_ported.db) is in the SQLite format
@@ -92,15 +92,13 @@ implementation
 
 {$R *.lfm}
 
-{ TMetal }
-
-procedure TMetal.GenerateMetalNameFormatted;
+function ApplySubscriptAndSuperscript(AText: string): string;
 var
   i, StartPos, EndPos: integer;
   OriginalStr, FormattedStr: string;
 begin
   //Apply subscript
-  OriginalStr := FMetalName;
+  OriginalStr := AText;
   FormattedStr := '';
   i := 1;
   repeat
@@ -183,7 +181,14 @@ begin
       Break;
     end;
   until False;
-  FMetalNameFormatted := FormattedStr;
+  Result := FormattedStr;
+end;
+
+{ TMetal }
+
+procedure TMetal.GenerateMetalNameFormatted;
+begin
+  FMetalNameFormatted := ApplySubscriptAndSuperscript(FMetalName);
 end;
 
 //Omit tags
@@ -229,6 +234,8 @@ var
   CurrentMetal: TMetal;
   CurrentLigandClass: TTreeNode;
 begin
+  TreeViewMetal.BeginUpdate;
+  TreeViewLigand.BeginUpdate;
   SQLite3Connection1.DatabaseName :=
     ExtractFilePath(Application.ExeName) + 'NIST_SRD_46_ported.db';
   TreeViewMetal.Items.Clear;
@@ -281,6 +288,9 @@ begin
     Inc(i);
   end;
   TreeViewLigand.Items.Item[0].Expand(False);
+  SQLQuery1.Close;
+  TreeViewMetal.EndUpdate;
+  TreeViewLigand.EndUpdate;
 end;
 
 procedure TFormMain.LabeledEditLigandFilterChange(Sender: TObject);
@@ -364,7 +374,9 @@ procedure TFormMain.StringGridSearchResultsSelection(Sender: TObject;
 var
   i, j: integer;
 begin
-  SQLQuery1.Close;
+  //ShowMessage('StringGridSearchResultsSelection called. aCol = ' +
+  //  IntToStr(aCol) + ', aRow = ' + IntToStr(aRow));
+  if SQLQuery1.Active then Exit;
   SQLQuery1.SQL.Text :=
     'SELECT Distinct literature_shortcut as Code, literature_alt as Literature ' +
     'FROM verkn_ligand_metal vlm ' +
@@ -374,8 +386,8 @@ begin
     'on vlm.ligandenNr=verkn_ligand_metal_literature.ligandenNr ' +
     'AND vlm.metalNr=verkn_ligand_metal_literature.metalNr ' +
     'INNER JOIN literature_alt on verkn_ligand_metal_literature.literature_altNr=literature_alt.literature_altID '
-    + 'WHERE name_metal="' + StringGridSearchResults.Cells[0, aRow] +
-    '" AND ' + 'name_ligand="' + StringGridSearchResults.Cells[1, aRow] + '";';
+    + 'WHERE name_metal=''' + TStringStream(StringGridSearchResults.Objects[0, aRow]).UnicodeDataString + ''' AND ' + 'name_ligand=''' +
+    StringGridSearchResults.Cells[1, aRow] + ''';';
   SQLQuery1.Open;
   SQLQuery1.Last;
   StringGridLiterature.RowCount := SQLQuery1.RecordCount + 1;
@@ -390,6 +402,7 @@ begin
     Inc(i);
     SQLQuery1.Next;
   end;
+  SQLQuery1.Close;
 end;
 
 //When a ligand(s) is selected on the treeview, the right radio button is checked and search is performed.
@@ -443,8 +456,13 @@ var
   WhereText, WhereTextMetal, WhereTextLigand: string;
   i, j: integer;
 begin
-  //Clear literature table
-  StringGridLiterature.RowCount:=1;
+  //Clear tables
+  StringGridLiterature.RowCount := 1;
+  for i := 1 to Pred(StringGridSearchResults.RowCount) do
+  begin
+    TStringStream(StringGridSearchResults.Objects[0,i]).Free;
+  end;
+  StringGridSearchResults.Clear;
   WhereText := '';
   WhereTextMetal := '';
   WhereTextLigand := '';
@@ -458,8 +476,8 @@ begin
       begin
         if Length(WhereTextMetal) > 0 then
           WhereTextMetal := WhereTextMetal + ' OR ';
-        WhereTextMetal := WhereTextMetal + 'name_metal="' +
-          TMetal(TreeViewMetal.Items.Item[i].Data).MetalName + '"';
+        WhereTextMetal := WhereTextMetal + 'name_metal=''' +
+          TMetal(TreeViewMetal.Items.Item[i].Data).MetalName + '''';
       end;
     end;
   end;
@@ -475,8 +493,8 @@ begin
         //it will be a search target.
         if Length(WhereTextLigand) > 0 then
           WhereTextLigand := WhereTextLigand + ' OR ';
-        WhereTextLigand := WhereTextLigand + 'name_ligandclass="' +
-          TreeViewLigand.Items.Item[i].Text + '"';
+        WhereTextLigand := WhereTextLigand + 'name_ligandclass=''' +
+          TreeViewLigand.Items.Item[i].Text + '''';
       end;
     end;
     for i := 0 to Pred(TreeViewLigand.Items.Count) do
@@ -490,8 +508,8 @@ begin
         begin
           if Length(WhereTextLigand) > 0 then
             WhereTextLigand := WhereTextLigand + ' OR ';
-          WhereTextLigand := WhereTextLigand + 'name_ligand="' +
-            TreeViewLigand.Items.Item[i].Text + '"';
+          WhereTextLigand := WhereTextLigand + 'name_ligand=''' +
+            TreeViewLigand.Items.Item[i].Text + '''';
         end;
       end;
     end;
@@ -503,7 +521,7 @@ begin
   //If no metal or ligand is selected, the whole result is not shown because it will take a long time.
   if Length(WhereText) = 0 then
   begin
-    StringGridSearchResults.Clear;
+    //StringGridSearchResults.Clear;
     EditSearchResult.Text := 'Either metal ion(s) or ligand(s) must be specified.';
     Exit;
   end;
@@ -514,7 +532,7 @@ begin
     3: WhereText := WhereText + ' AND name_constanttyp=''S''';
   end;
   //Search result is shown in the string grid.
-  SQLQuery1.Close;
+  //SQLQuery1.Close;
   SQLQuery1.SQL.Text :=
     'SELECT met.name_metal as ''Metal ion'', ' + 'lig.name_ligand as ''Ligand'', ' +
     'lig.formula as ''Formula'', ' +
@@ -536,6 +554,8 @@ begin
   if Length(WhereText) > 0 then
     SQLQuery1.SQL.Text := SQLQuery1.SQL.Text + 'WHERE ' + WhereText;
   SQLQuery1.SQL.Text := SQLQuery1.SQL.Text + ';';
+  StringGridSearchResults.BeginUpdate;
+  StringGridLiterature.BeginUpdate;
   SQLQuery1.Open;
   SQLQuery1.Last;
   StringGridSearchResults.ColCount := SQLQuery1.FieldCount;
@@ -556,11 +576,25 @@ begin
   begin
     for j := 0 to Pred(SQLQuery1.FieldCount) do
     begin
-      StringGridSearchResults.Cells[j, i] := SQLQuery1.Fields.Fields[j].AsString;
+      case j of
+        0: begin
+          StringGridSearchResults.Cells[j, i] :=
+            ApplySubscriptAndSuperscript(SQLQuery1.Fields.Fields[j].AsString);
+          StringGridSearchResults.Objects[j, i] :=
+            TStringStream.Create(SQLQuery1.Fields.Fields[j].AsString);
+        end;
+        4,9: StringGridSearchResults.Cells[j, i] :=
+            ApplySubscriptAndSuperscript(SQLQuery1.Fields.Fields[j].AsString);
+        else
+          StringGridSearchResults.Cells[j, i] := SQLQuery1.Fields.Fields[j].AsString;
+      end;
     end;
     Inc(i);
     SQLQuery1.Next;
   end;
+  SQLQuery1.Close;
+  StringGridSearchResults.EndUpdate;
+  StringGridLiterature.EndUpdate;
 end;
 
 end.
