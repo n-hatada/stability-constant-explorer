@@ -52,3 +52,5 @@ The SQLite3 engine (sqlite3.dll) is in the public domain. The other files (the s
 ### v1.1.1, released on Apr. 6, 2023
 * Minor fixes and improvements.
 * Update SQLite3 engine.
+### v1.1.2, released on Sep. 25, 2023
+* Bug fix. (Apostrophe character in ligand names has caused crash.) 

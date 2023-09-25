@@ -1,7 +1,7 @@
-{ Stability Constant Explorer ver.1.1.1
+{ Stability Constant Explorer ver.1.1.2
 
  The source code of this program is in the public domain.
- Date: Apr. 6, 2023
+ Date: Sep. 25, 2023
  Author: Naoyuki Hatada
 
  The accompanying database file (NIST_SRD_46_ported.db) is in the SQLite format
@@ -91,6 +91,11 @@ var
 implementation
 
 {$R *.lfm}
+
+function SQLiteEscapeString(AText: string): string;
+begin
+  Result := StringReplace(AText, #$27, #$27#$27, [rfReplaceAll]);
+end;
 
 function ApplySubscriptAndSuperscript(AText: string): string;
 var
@@ -276,7 +281,7 @@ begin
         'SELECT name_ligand FROM liganden ' +
         'INNER JOIN ligand_class on liganden.ligand_classNr=ligand_class.ligand_classID '
         +
-        'WHERE ligand_class.name_ligandclass="' + CurrentLigandClassStr + '";';
+        'WHERE ligand_class.name_ligandclass=''' + CurrentLigandClassStr + ''';';
       SQLQuery1.Open;
       while (not SQLQuery1.EOF) do
       begin
@@ -387,7 +392,7 @@ begin
     'AND vlm.metalNr=verkn_ligand_metal_literature.metalNr ' +
     'INNER JOIN literature_alt on verkn_ligand_metal_literature.literature_altNr=literature_alt.literature_altID '
     + 'WHERE name_metal=''' + TStringStream(StringGridSearchResults.Objects[0, aRow]).UnicodeDataString + ''' AND ' + 'name_ligand=''' +
-    StringGridSearchResults.Cells[1, aRow] + ''';';
+    SQLiteEscapeString(StringGridSearchResults.Cells[1, aRow]) + ''';';
   SQLQuery1.Open;
   SQLQuery1.Last;
   StringGridLiterature.RowCount := SQLQuery1.RecordCount + 1;
@@ -460,7 +465,7 @@ begin
   StringGridLiterature.RowCount := 1;
   for i := 1 to Pred(StringGridSearchResults.RowCount) do
   begin
-    TStringStream(StringGridSearchResults.Objects[0,i]).Free;
+    TStringStream(StringGridSearchResults.Objects[0, i]).Free;
   end;
   StringGridSearchResults.Clear;
   WhereText := '';
@@ -509,7 +514,7 @@ begin
           if Length(WhereTextLigand) > 0 then
             WhereTextLigand := WhereTextLigand + ' OR ';
           WhereTextLigand := WhereTextLigand + 'name_ligand=''' +
-            TreeViewLigand.Items.Item[i].Text + '''';
+            SQLiteEscapeString(TreeViewLigand.Items.Item[i].Text) + '''';
         end;
       end;
     end;
@@ -583,7 +588,7 @@ begin
           StringGridSearchResults.Objects[j, i] :=
             TStringStream.Create(SQLQuery1.Fields.Fields[j].AsString);
         end;
-        4,9: StringGridSearchResults.Cells[j, i] :=
+        4, 9: StringGridSearchResults.Cells[j, i] :=
             ApplySubscriptAndSuperscript(SQLQuery1.Fields.Fields[j].AsString);
         else
           StringGridSearchResults.Cells[j, i] := SQLQuery1.Fields.Fields[j].AsString;
