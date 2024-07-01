@@ -17,7 +17,7 @@
         <link href="https://n-hatada.github.io/stability-constant-explorer/english.html"/>
         <id>https://n-hatada.github.io/stability-constant-explorer/english.html</id>
 
-        <updated>2023-09-25T19:06:24+09:00</updated>
+        <updated>2023-09-25T19:00:00+09:00</updated>
             <summary>
                 <![CDATA[
                     Overview Stability Constant Explorer is a simple search program for NIST SRD 46 database, “Critically Selected Stability Constants of Metal&hellip;
@@ -26,42 +26,32 @@
         <content type="html">
             <![CDATA[
                 <h2 id="overview">Overview</h2>
-<p>Stability Constant Explorer is a simple search program for <a href="https://data.nist.gov/od/id/mds2-2154">NIST SRD 46 database, “Critically Selected Stability Constants of Metal Complexes”</a>. This database is very useful for chemists, but unfortunately it has been discontinued and the official search program does not work on modern PCs. Therefore, I have created a simple search program based on the data available on the NIST website.</p>
-<h2 id="download">Download</h2>
+<p>Stability Constant Explorer is a simple search program for <a href="https://data.nist.gov/od/id/mds2-2154">NIST SRD 46 database, “Critically Selected Stability Constants of Metal Complexes”</a>. This database is very useful for chemists, but unfortunately it has been discontinued and the official search program does not work on modern PCs. Therefore, I have created a simple search program based on the data available on the NIST website.</p><h2 id="download">Download</h2>
 <ul>
 <li>For Microsoft Windows 7 or later (64 bit), download <a href="https://github.com/n-hatada/stability-constant-explorer/releases/download/v1.1.2/StabilityConstantExplorer_Win64.zip">StabilityConstantExplorer_Win64.zip</a> (v1.1.2, Released on Sep. 25, 2023.).</li>
 <li>The Source code is available on <a href="https://github.com/n-hatada/stability-constant-explorer">GitHub</a>.</li>
 </ul>
 <h2 id="install">Install</h2>
 <h3 id="on-microsoft-windows-7-or-later-64-bit">On Microsoft Windows 7 or later (64 bit)</h3>
-<p>Unzip the downloaded compressed file to an appropriate folder. The compressed file contains the following files:</p>
-<ul>
+<p>Unzip the downloaded compressed file to an appropriate folder. The compressed file contains the following files:</p><ul>
 <li>Executable program (StabilityConstantExplorer.exe)</li>
 <li>SQLite3 database engine (sqlite3.dll)</li>
 <li>Stability constants database (NIST_SRD_46_ported.db)</li>
 <li>Documentation (Readme_Win64.txt)</li>
 </ul>
 <h3 id="on-other-operating-systems">On other operating systems</h3>
-<p>Compile the source code using <a href="https://www.lazarus-ide.org/">Lazarus</a>. Obtain and install an appropriate <a href="https://www.sqlite.org/index.html">SQLite3</a> engine. Place the database file (NIST_SRD_46_ported.db) in the same folder as the compiled program.</p>
-<h2 id="usage">Usage</h2>
+<p>Compile the source code using <a href="https://www.lazarus-ide.org/">Lazarus</a>. Obtain and install an appropriate <a href="https://www.sqlite.org/index.html">SQLite3</a> engine. Place the database file (NIST_SRD_46_ported.db) in the same folder as the compiled program.</p><h2 id="usage">Usage</h2>
 <p>Execute the program. On the left side of the window, specify the search criteria for stability constants (metal ions and ligands). The search results are displayed on the right side.
-<figure class="post__image"><img loading="lazy" src="https://n-hatada.github.io/stability-constant-explorer/media/posts/5/screenshot.png" alt="Screenshot" width="1963" height="685"  sizes="(max-width: 48em) 100vw, 768px" srcset="https://n-hatada.github.io/stability-constant-explorer/media/posts/5/responsive/screenshot-xs.png 300w ,https://n-hatada.github.io/stability-constant-explorer/media/posts/5/responsive/screenshot-sm.png 480w ,https://n-hatada.github.io/stability-constant-explorer/media/posts/5/responsive/screenshot-md.png 768w"></figure></p>
-<h2 id="author">Author</h2>
+<figure class="post__image"><img loading="lazy" src="https://n-hatada.github.io/stability-constant-explorer/media/posts/5/screenshot.png" alt="Screenshot" width="1963" height="685"  sizes="(max-width: 48em) 100vw, 768px" srcset="https://n-hatada.github.io/stability-constant-explorer/media/posts/5/responsive/screenshot-xs.png 300w ,https://n-hatada.github.io/stability-constant-explorer/media/posts/5/responsive/screenshot-sm.png 480w ,https://n-hatada.github.io/stability-constant-explorer/media/posts/5/responsive/screenshot-md.png 768w"></figure></p><h2 id="author">Author</h2>
 <p>Naoyuki Hatada, Ph.D.
-Department of Materials Science and Engineering, Kyoto University</p>
-<h2 id="data-source">Data source</h2>
-<p>The accompanying database file (NIST_SRD_46_ported.db) is based on the following dataset which is distributed at the NIST website:</p>
-<ul>
+Department of Materials Science and Engineering, Kyoto University</p><h2 id="data-source">Data source</h2>
+<p>The accompanying database file (NIST_SRD_46_ported.db) is based on the following dataset which is distributed at the NIST website:</p><ul>
 <li>Donald R. Burgess (2004), NIST SRD 46. Critically Selected Stability Constants of Metal Complexes: Version 8.0 for Windows, National Institute of Standards and Technology, <a href="https://doi.org/10.18434/M32154">https://doi.org/10.18434/M32154</a> (Accessed June 25, 2021)</li>
 </ul>
-<p>The author (Naoyuki Hatada) downloaded the dataset (SRD 46 SQL.zip) from the above website and converted to a database file in the SQLite3 format (NIST_SRD_46_ported.db). The database file may contain errors described in “SRD 46 README.txt” on the above website or those caused by the conversion process. </p>
-<h2 id="license">License</h2>
-<p>The database file (NIST_SRD_46_ported.db) is a derivative work of the data distributed by NIST. See the <a href="https://doi.org/10.18434/M32154">NIST website</a> for usage guidelines. In particular, you must follow the text quoted below from “SRD 46 README.txt” on the NIST website.</p>
-<blockquote>
-<p>You may improve, modify, and create derivative works of the data or any portion of the data, and you may copy and distribute such modifications or works. Modified works should carry a notice stating that you changed the data and should note the date and nature of any such change. Please explicitly acknowledge the National Institute of Standards and Technology as the source of the data:  Data citation recommendations are provided at <a href="https://www.nist.gov/open/license">https://www.nist.gov/open/license</a>.</p>
-</blockquote>
-<p>The SQLite3 engine (sqlite3.dll) is in the public domain. The other files (the source code and the executable program) are released into the public domain by the author. </p>
-<h2 id="version-history">Version history</h2>
+<p>The author (Naoyuki Hatada) downloaded the dataset (SRD 46 SQL.zip) from the above website and converted to a database file in the SQLite3 format (NIST_SRD_46_ported.db). The database file may contain errors described in “SRD 46 README.txt” on the above website or those caused by the conversion process. </p><h2 id="license">License</h2>
+<p>The database file (NIST_SRD_46_ported.db) is a derivative work of the data distributed by NIST. See the <a href="https://doi.org/10.18434/M32154">NIST website</a> for usage guidelines. In particular, you must follow the text quoted below from “SRD 46 README.txt” on the NIST website.</p><blockquote>
+<p>You may improve, modify, and create derivative works of the data or any portion of the data, and you may copy and distribute such modifications or works. Modified works should carry a notice stating that you changed the data and should note the date and nature of any such change. Please explicitly acknowledge the National Institute of Standards and Technology as the source of the data:  Data citation recommendations are provided at <a href="https://www.nist.gov/open/license">https://www.nist.gov/open/license</a>.</p></blockquote>
+<p>The SQLite3 engine (sqlite3.dll) is in the public domain. The other files (the source code and the executable program) are released into the public domain by the author. </p><h2 id="version-history">Version history</h2>
 <h3 id="v10-released-on-may-27-2022">v1.0, released on May 27, 2022</h3>
 <ul>
 <li>Initial release.</li>
@@ -97,7 +87,7 @@ Department of Materials Science and Engineering, Kyoto University</p>
         <link href="https://n-hatada.github.io/stability-constant-explorer/japanese.html"/>
         <id>https://n-hatada.github.io/stability-constant-explorer/japanese.html</id>
 
-        <updated>2023-09-25T19:06:32+09:00</updated>
+        <updated>2023-09-25T19:00:00+09:00</updated>
             <summary>
                 <![CDATA[
                     概要 Stability Constant Explorerは、アメリカ国立標準技術研究所 (NIST) により作成された金属錯体の安定度定数データベース (NIST SRD 46 database, “Critically Selected Stability Constants of Metal Complexes”) を検索・表示するオープンソースのプログラムです。このデータベースは化学者にとって非常に有用ですが、残念ながら開発中止され、公式の検索プログラムは現代のPCでは動作しません。そこで、NISTのホームページで公開されているデータをもとに、簡単な検索プログラムを作成しました。 ダウンロードした圧縮ファイルを適当なフォルダーに解凍してください。圧縮ファイルには、以下のファイルが含まれています。 Lazarusを使って、ソースコードをコンパイルしてください。適切なSQLite3エンジンを入手し、インストールしてください。データベースファイル&hellip;
@@ -106,8 +96,7 @@ Department of Materials Science and Engineering, Kyoto University</p>
         <content type="html">
             <![CDATA[
                 <h2 id="概要">概要</h2>
-<p>Stability Constant Explorerは、アメリカ国立標準技術研究所 (NIST) により作成された金属錯体の安定度定数データベース (<a href="https://data.nist.gov/od/id/mds2-2154">NIST SRD 46 database, “Critically Selected Stability Constants of Metal Complexes”</a>) を検索・表示するオープンソースのプログラムです。このデータベースは化学者にとって非常に有用ですが、残念ながら開発中止され、公式の検索プログラムは現代のPCでは動作しません。そこで、NISTのホームページで公開されているデータをもとに、簡単な検索プログラムを作成しました。</p>
-<h2 id="ダウンロード">ダウンロード</h2>
+<p>Stability Constant Explorerは、アメリカ国立標準技術研究所 (NIST) により作成された金属錯体の安定度定数データベース (<a href="https://data.nist.gov/od/id/mds2-2154">NIST SRD 46 database, “Critically Selected Stability Constants of Metal Complexes”</a>) を検索・表示するオープンソースのプログラムです。このデータベースは化学者にとって非常に有用ですが、残念ながら開発中止され、公式の検索プログラムは現代のPCでは動作しません。そこで、NISTのホームページで公開されているデータをもとに、簡単な検索プログラムを作成しました。</p><h2 id="ダウンロード">ダウンロード</h2>
 <ul>
 <li>Microsoft Windows 7 以降 (64 bit) 用 (v1.1.2, 2023年9月25日公開) 
 <a href="https://github.com/n-hatada/stability-constant-explorer/releases/download/v1.1.2/StabilityConstantExplorer_Win64.zip">StabilityConstantExplorer_Win64.zip</a>.</li>
@@ -116,33 +105,24 @@ Department of Materials Science and Engineering, Kyoto University</p>
 </ul>
 <h2 id="インストール">インストール</h2>
 <h3 id="microsoft-windows-7-以降-64-bit">Microsoft Windows 7 以降 (64 bit)</h3>
-<p>ダウンロードした圧縮ファイルを適当なフォルダーに解凍してください。圧縮ファイルには、以下のファイルが含まれています。</p>
-<ul>
+<p>ダウンロードした圧縮ファイルを適当なフォルダーに解凍してください。圧縮ファイルには、以下のファイルが含まれています。</p><ul>
 <li>実行プログラム (StabilityConstantExplorer.exe)</li>
 <li>SQLite3データベースエンジン (sqlite3.dll)</li>
 <li>安定度定数データベース (NIST_SRD_46_ported.db)</li>
 <li>ドキュメント (Readme_Win64.txt)</li>
 </ul>
 <h3 id="その他のオペレーティングシステム">その他のオペレーティングシステム</h3>
-<p><a href="https://www.lazarus-ide.org/">Lazarus</a>を使って、ソースコードをコンパイルしてください。適切な<a href="https://www.sqlite.org/index.html">SQLite3</a>エンジンを入手し、インストールしてください。データベースファイル (NIST_SRD_46_ported.db) をコンパイルしたプログラムと同じフォルダーに置いてください。</p>
-<h2 id="使い方">使い方</h2>
+<p><a href="https://www.lazarus-ide.org/">Lazarus</a>を使って、ソースコードをコンパイルしてください。適切な<a href="https://www.sqlite.org/index.html">SQLite3</a>エンジンを入手し、インストールしてください。データベースファイル (NIST_SRD_46_ported.db) をコンパイルしたプログラムと同じフォルダーに置いてください。</p><h2 id="使い方">使い方</h2>
 <p>プログラムを実行します。ウィンドウの左側で、安定度定数の検索条件 （金属イオンと配位子） を指定します。右側に検索結果が表示されます。
-<figure class="post__image"><img loading="lazy" src="https://n-hatada.github.io/stability-constant-explorer/media/posts/6/screenshot.png" alt="Screenshot" width="1963" height="685"  sizes="(max-width: 48em) 100vw, 768px" srcset="https://n-hatada.github.io/stability-constant-explorer/media/posts/6/responsive/screenshot-xs.png 300w ,https://n-hatada.github.io/stability-constant-explorer/media/posts/6/responsive/screenshot-sm.png 480w ,https://n-hatada.github.io/stability-constant-explorer/media/posts/6/responsive/screenshot-md.png 768w"></figure></p>
-<h2 id="プログラムの作者">プログラムの作者</h2>
-<p>畑田　直行　（京都大学大学院工学研究科材料工学専攻）</p>
-<h2 id="データの出典">データの出典</h2>
-<p>付属のデータベースファイル（NIST_SRD_46_ported.db）は、NISTのホームページで配布されている以下のデータセットに基づいています。</p>
-<ul>
+<figure class="post__image"><img loading="lazy" src="https://n-hatada.github.io/stability-constant-explorer/media/posts/6/screenshot.png" alt="Screenshot" width="1963" height="685"  sizes="(max-width: 48em) 100vw, 768px" srcset="https://n-hatada.github.io/stability-constant-explorer/media/posts/6/responsive/screenshot-xs.png 300w ,https://n-hatada.github.io/stability-constant-explorer/media/posts/6/responsive/screenshot-sm.png 480w ,https://n-hatada.github.io/stability-constant-explorer/media/posts/6/responsive/screenshot-md.png 768w"></figure></p><h2 id="プログラムの作者">プログラムの作者</h2>
+<p>畑田　直行　（京都大学大学院工学研究科材料工学専攻）</p><h2 id="データの出典">データの出典</h2>
+<p>付属のデータベースファイル（NIST_SRD_46_ported.db）は、NISTのホームページで配布されている以下のデータセットに基づいています。</p><ul>
 <li>Donald R. Burgess (2004), NIST SRD 46. Critically Selected Stability Constants of Metal Complexes: Version 8.0 for Windows, National Institute of Standards and Technology, <a href="https://doi.org/10.18434/M32154">https://doi.org/10.18434/M32154</a> (Accessed June 25, 2021)</li>
 </ul>
-<p>プログラムの作者（畑田直行）は、上記ウェブサイトからデータセット（SRD 46 SQL.zip）をダウンロードし、SQLite3形式のデータベースファイル（NIST_SRD_46_ported.db）に変換しました。このデータベースファイルには、上記ウェブサイト上の “SRD 46 README.txt “に記載されているエラーのほか、変換処理に起因するエラーが含まれている可能性があります。</p>
-<h2 id="ライセンス">ライセンス</h2>
-<p>データベースファイル(NIST_SRD_46_ported.db)は、NISTが配布しているデータの二次的著作物です。使用上のガイドラインは<a href="https://doi.org/10.18434/M32154">NISTのウェブサイト</a>を参照してください。特に上記のNISTウェブサイトの”SRD 46 README.txt “ に記載されている下記の条件に従う必要があります。</p>
-<blockquote>
-<p>You may improve, modify, and create derivative works of the data or any portion of the data, and you may copy and distribute such modifications or works. Modified works should carry a notice stating that you changed the data and should note the date and nature of any such change. Please explicitly acknowledge the National Institute of Standards and Technology as the source of the data:  Data citation recommendations are provided at <a href="https://www.nist.gov/open/license">https://www.nist.gov/open/license</a>.</p>
-</blockquote>
-<p>SQLite3エンジン(sqlite3.dll)はパブリックドメインです。その他のファイル(ソースコードと実行プログラム)はパブリックドメインとして公開します。</p>
-<h2 id="バージョン履歴">バージョン履歴</h2>
+<p>プログラムの作者（畑田直行）は、上記ウェブサイトからデータセット（SRD 46 SQL.zip）をダウンロードし、SQLite3形式のデータベースファイル（NIST_SRD_46_ported.db）に変換しました。このデータベースファイルには、上記ウェブサイト上の “SRD 46 README.txt “に記載されているエラーのほか、変換処理に起因するエラーが含まれている可能性があります。</p><h2 id="ライセンス">ライセンス</h2>
+<p>データベースファイル(NIST_SRD_46_ported.db)は、NISTが配布しているデータの二次的著作物です。使用上のガイドラインは<a href="https://doi.org/10.18434/M32154">NISTのウェブサイト</a>を参照してください。特に上記のNISTウェブサイトの”SRD 46 README.txt “ に記載されている下記の条件に従う必要があります。</p><blockquote>
+<p>You may improve, modify, and create derivative works of the data or any portion of the data, and you may copy and distribute such modifications or works. Modified works should carry a notice stating that you changed the data and should note the date and nature of any such change. Please explicitly acknowledge the National Institute of Standards and Technology as the source of the data:  Data citation recommendations are provided at <a href="https://www.nist.gov/open/license">https://www.nist.gov/open/license</a>.</p></blockquote>
+<p>SQLite3エンジン(sqlite3.dll)はパブリックドメインです。その他のファイル(ソースコードと実行プログラム)はパブリックドメインとして公開します。</p><h2 id="バージョン履歴">バージョン履歴</h2>
 <h3 id="v10-2022年5月27日公開">v1.0, 2022年5月27日公開</h3>
 <ul>
 <li>初期リリース</li>
