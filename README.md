@@ -3,7 +3,7 @@
 Stability Constant Explorer is a simple search program for [NIST SRD 46 database, "Critically Selected Stability Constants of Metal Complexes"](https://data.nist.gov/od/id/mds2-2154). This database is very useful for chemists, but unfortunately it has been discontinued and the official search program does not work on modern PCs. Therefore, I have created a simple search program based on the data available on the NIST website.
 
 ## Download
-* For Microsoft Windows 7 or later (64 bit), download [StabilityConstantExplorer_Win64.zip](https://github.com/n-hatada/stability-constant-explorer/releases/download/v1.1.1/StabilityConstantExplorer_Win64.zip) (v1.1.1, Released on Apr. 6, 2023.).
+* For Microsoft Windows 7 or later (64 bit), download [StabilityConstantExplorer_Win64.zip](https://github.com/n-hatada/stability-constant-explorer/releases/download/v1.1.2/StabilityConstantExplorer_Win64.zip) (v1.1.2, Released on Sep. 25, 2023.).
 * The Source code is available on [GitHub](https://github.com/n-hatada/stability-constant-explorer).
 
 ## Install
